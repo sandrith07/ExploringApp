@@ -1,0 +1,7 @@
+{
+  "name": "AppExploring",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
