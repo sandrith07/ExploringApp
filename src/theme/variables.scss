@@ -226,3 +226,21 @@
     --ion-tab-bar-background: #1f1f1f;
   }
 }
+
+#marker{
+  background-image: url('../assets/icon/gps.png');
+  background-size: cover;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+#marker-municipio{
+  background-image: url('../assets/icon/gps.png');
+  background-size: cover;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  cursor: pointer;
+}

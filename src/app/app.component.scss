@@ -1,0 +1,24 @@
+@font-face{
+    font-family: Merriweather;
+    src : url('../assets/fonts/Merriweather.woff2')
+}
+
+@font-face{
+    font-family: MerriweatherCirilic;
+    src : url('../assets/fonts/MerriweatherCirilic.woff2')
+}
+
+@font-face{
+    font-family: RobotoSlab;
+    src : url('../assets/fonts/RobotoSlab.woff2')
+}
+
+
+#titulo{
+    color: #0066CC;
+    font-family: RobotoSlab;
+    font-style: italic;
+    font-weight: 700;
+    font-display: swap;
+    }
+
