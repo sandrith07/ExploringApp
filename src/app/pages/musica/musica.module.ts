@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { SitiosTuristicosPageRoutingModule } from './sitios-turisticos-routing.module';
+import { MusicaPageRoutingModule } from './musica-routing.module';
 
-import { SitiosTuristicosPage } from './sitios-turisticos.page';
+import { MusicaPage } from './musica.page';
 import { ComponentsModule } from '../../components/components.module';
 
 @NgModule({
@@ -14,9 +14,9 @@ import { ComponentsModule } from '../../components/components.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    SitiosTuristicosPageRoutingModule,
+    MusicaPageRoutingModule,
     ComponentsModule
   ],
-  declarations: [SitiosTuristicosPage]
+  declarations: [MusicaPage]
 })
-export class SitiosTuristicosPageModule {}
+export class MusicaPageModule {}

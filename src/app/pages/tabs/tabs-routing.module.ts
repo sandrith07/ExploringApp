@@ -32,6 +32,26 @@ const routes: Routes = [
         loadChildren: () => import('../login/login.module').then(m => m.LoginPageModule)
       },
       {
+        path: 'musica',
+        loadChildren: () => import('../musica/musica.module').then(m => m.MusicaPageModule)
+      },
+      {
+        path: 'eventos',
+        loadChildren: () => import('../eventos/eventos.module').then(m => m.EventosPageModule)
+      },
+      {
+        path: 'negocio',
+        loadChildren: () => import('../negocio/negocio.module').then(m => m.NegocioPageModule)
+      },
+      {
+        path: 'sitios-turisticos',
+        loadChildren: () => import('../sitios-turisticos/sitios-turisticos.module').then(m => m.SitiosTuristicosPageModule)
+      },
+      {
+        path: 'historia',
+        loadChildren: () => import('../historia/historia.module').then(m => m.HistoriaPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/ultimas-noticias',
         pathMatch: 'full'
