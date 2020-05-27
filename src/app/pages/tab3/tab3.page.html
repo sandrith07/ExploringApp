@@ -1,125 +1,35 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title id="titulo">
-      ExploringApp
-    </ion-title>
-  </ion-toolbar>
+  <app-header></app-header>
 </ion-header>
+<ion-segment [(ngModel)]="accion" color="titulo" >
+  <ion-segment-button value="todos" id="titulo" >Todos</ion-segment-button>
+  <ion-segment-button value="favoritos" id="titulo">Favoritos</ion-segment-button>
+</ion-segment>
+<ion-content class="background" center *ngIf="accion=='todos'">
 
+<div id="card"><ion-card class="welcome-card" [routerLink]="['/tabs/tab3']" class="background-musica">
+  <br>
+  <h2>Música</h2>
+</ion-card></div>
+<div id="card"><ion-card class="welcome-card" [routerLink]="['/tabs/tab3']" class="background-historia">
+  <br>
+  <h2>Historia</h2>
+</ion-card></div>
+<div id="card"><ion-card class="welcome-card" [routerLink]="['/tabs/tab3']" class="background-sitio">
+  <br>
+  <h2>Negocios</h2>
+</ion-card></div>
 
-<ion-content>
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title  id="title-card">Información cultural</ion-card-title>
-    </ion-card-header>
-  
-    <ion-card-content>
-      <ion-slides>
-        <ion-slide>
-          <div>
-            <ion-card-subtitle id="subtitulo">Historia</ion-card-subtitle>
-           <img id="imagen" src="assets/img/historia.png" />
-            
-          </div>
-        </ion-slide>
-  
-        <ion-slide>
-          <div class="slide">
-            <ion-card-subtitle id="subtitulo">Juglares</ion-card-subtitle>
-            <img id="imagen" src="assets/img/juglares.png" />
-           
-           </div>
-        </ion-slide>
-  
-        <ion-slide>
-          <ion-card-subtitle id="subtitulo">Leyendas</ion-card-subtitle>
-          <img id="imagen" src="assets/img/sirena.png" />
-        </ion-slide>
-  
-        <ion-slide>
-          <ion-card-subtitle>Platos tipicos</ion-card-subtitle>
-          <img id="imagen" src="assets/img/plato.png" />
-        </ion-slide>
-      </ion-slides>
-      <ion-button fill="outline" slot="end" expand="block" >Ver más</ion-button>
-    </ion-card-content>
-  </ion-card>
-  
-    
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title  id="title-card">Sitios Turísticos</ion-card-title>
-      </ion-card-header>
-    
-      <ion-card-content>
-        <ion-slides>
-          <ion-slide>
-            <div>
-              <ion-card-subtitle id="subtitulo">Balneario Hurtado</ion-card-subtitle>
-             <img id="imagen" src="assets/img/hurtado.png" />
-              
-            </div>
-          </ion-slide>
-    
-          <ion-slide>
-            <div class="slide">
-              <ion-card-subtitle id="subtitulo">Parque de la leyenda Vallenata</ion-card-subtitle>
-              <img id="imagen" src="assets/img/parque.png" />
-             
-             </div>
-          </ion-slide>
-    
-          <ion-slide>
-            <ion-card-subtitle id="subtitulo">Plaza Alfonso López</ion-card-subtitle>
-            <img id="imagen" src="assets/img/historia.png" />
-          </ion-slide>
-    
-          <ion-slide>
-            <ion-card-subtitle>La iglesia de la Concepción</ion-card-subtitle>
-            <img id="imagen" src="assets/img/iglesia.png" />
-          </ion-slide>
-          <ion-slide>
-            <ion-card-subtitle id="subtitulo">El callejón de la Purrututú</ion-card-subtitle>
-            <img id="imagen" src="assets/img/purrupupu.png" />
-          </ion-slide>
-    
-        </ion-slides>
-        <ion-button fill="outline" slot="end" expand="block" >Ver más</ion-button>
-      </ion-card-content>
-    </ion-card>
-     
-  
-        <ion-card>
-          <ion-card-header>
-            <ion-card-title id="title-card">Eventos anuales</ion-card-title>
-          </ion-card-header>
-        
-          <ion-card-content>
-            <ion-slides>
-              
-              <ion-slide>
-                <div>
-                  <ion-card-subtitle id="subtitulo">Festival de la Leyenda Vallenata</ion-card-subtitle>
-                 <img id="imagen" src="assets/img/festival.png" />
-                </div>
-              </ion-slide>
+<div id="card"><ion-card class="welcome-card" [routerLink]="['/tabs/tab3']" class="background-negocio">
+  <br>
+  <h2>Sitios Turisticos</h2>
+</ion-card></div>
+</ion-content>
 
-              <ion-slide>
-                <div>
-                  <ion-card-subtitle id="subtitulo">Festival de la Paletilla</ion-card-subtitle>
-                 <img id="imagen" src="assets/img/paletilla.png" />
-                </div>
-              </ion-slide>
-        
-              <ion-slide>
-                <div class="slide">
-                  <ion-card-subtitle id="subtitulo">Fiestas Celestiales</ion-card-subtitle>
-                  <img id="imagen" src="assets/img/fiestas.png" />
-                 </div>
-              </ion-slide>
-        
-            </ion-slides>
-            <ion-button fill="outline" slot="end" expand="block" routerLink="/eventos" routerDirection="root">Ver más</ion-button>
-          </ion-card-content>
-        </ion-card>
+<ion-content class="background" center *ngIf="accion=='favoritos'">
+
+<div id="card"><ion-card class="welcome-card" [routerLink]="['/tabs/tab3']" class="background">
+  <br>
+  <h2>No hay nada en la lista de Favoritos</h2>
+</ion-card></div>
 </ion-content>
