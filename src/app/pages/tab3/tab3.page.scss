@@ -88,6 +88,11 @@ ion-card.background-musica{
   height: 120px;
   
 }
+ion-card-header.background-eventos{
+  background: url(src/assets/img/eventos.jpeg) 0 0/100% ;
+  height: 120px;
+  
+}
 
 ion-card-header.background-musica{
   background: url(src/assets/img/mu.jpeg) 0 0/100% ;
@@ -96,12 +101,12 @@ ion-card-header.background-musica{
 }
 
 ion-card-header.background-historia{
-  --background: url(src/assets/img/hi.jpeg) 0 0/100% ;
+  --background: url(src/assets/img/historia.jpeg) 0 0/100% ;
   background-color:#03AEFE;
   height: 120px;
 }
-ion-card.background-sitio{
-  --background: url(src/assets/img/sitio.png) 0 0/100% ;
+ion-card-header.background-sitio{
+  --background: url(src/assets/img/sitios.jpeg) 0 0/100% ;
   background-color:#03AEFE;
   height: 120px;
 }
@@ -126,6 +131,15 @@ ion-toolbar {
 }
 
 #icono-favorito-select{
+  color: #E83553;
+  size: 50px;
+}
+.icono-favorito{
+  size: 50px;
+  border-color: black;
+}
+
+.icono-favorito-select{
   color: #E83553;
   size: 50px;
 }
