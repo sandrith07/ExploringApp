@@ -1,7 +1,8 @@
 {
   "name": "AppExploring",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {},
+    "cordova": {}
   },
   "type": "angular"
 }

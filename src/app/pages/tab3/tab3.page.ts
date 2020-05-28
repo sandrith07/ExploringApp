@@ -2,19 +2,30 @@ import { Component } from '@angular/core';
 import { ToastController} from '@ionic/angular';
 import {PopoverController} from '@ionic/angular'
 import { PopoverComponent } from '../../components/popover/popover.component';
+import { Tema } from '../../interfaces/Tema'
+import {ActivatedRoute, Router} from '@angular/router';
+
 @Component({
   selector: 'app-tab3',
   templateUrl: 'tab3.page.html',
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page {
+  accion = 'todos';
+  visible = false;
+  /*
+  tema: Tema = {
+    titulo: '',
+    contenido: '',
+    favorito: '',
+  };*/
 
   constructor(
     private toastCtrl: ToastController,
     public popoverController: PopoverController,
+    private router: Router,
+
   ) {}
-  accion = 'todos';
-  visible = false;
 
   toggle() {
    this.visible = !this.visible;
@@ -54,11 +65,7 @@ export class Tab3Page {
     return await popover.present();
   }
 
-  /* toggleReorder() {
-    const reorderGroup = document.getElementById('reorder');
-    reorderGroup.disabled = !reorderGroup.disabled;
-    reorderGroup.addEventListener('ionItemReorder', ({detail}) => {
-      detail.complete(true);
-    });
-  }*/
+
 }
+
+
