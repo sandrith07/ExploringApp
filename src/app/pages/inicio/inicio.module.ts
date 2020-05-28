@@ -4,19 +4,20 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { SitiosTuristicosPageRoutingModule } from './sitios-turisticos-routing.module';
+import { InicioPageRoutingModule } from './inicio-routing.module';
 
-import { SitiosTuristicosPage } from './sitios-turisticos.page';
+import { InicioPage } from './inicio.page';
 import { ComponentsModule } from '../../components/components.module';
+import { LoginComponent } from '../../components/login/login.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    SitiosTuristicosPageRoutingModule,
+    InicioPageRoutingModule,
     ComponentsModule
   ],
-  declarations: [SitiosTuristicosPage]
+  declarations: [InicioPage]
 })
-export class SitiosTuristicosPageModule {}
+export class InicioPageModule {}

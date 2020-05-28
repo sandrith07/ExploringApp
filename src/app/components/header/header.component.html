@@ -1,20 +1,10 @@
 <ion-header>
   <ion-toolbar>
-    <ion-grid>
-      <ion-row>
-        <ion-col size="9">
-          <div><ion-title id="titulo">ExploringApp</ion-title></div>
-        </ion-col>
-        <ion-col size="1">
-        <ion-icon name="notifications-circle-outline" id="icono"></ion-icon>
-        </ion-col >
-        <ion-col size="1">
-          <div>
-            <ion-icon name="person-circle-outline" id="icono"></ion-icon>
-          </div>
-            
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+    <ion-buttons slot="start" center *ngIf="tipoHeader=='back'">
+      <ion-back-button defaultHref="/tabs/tab3"></ion-back-button>
+    </ion-buttons>
+    <div class="ion-text-capitalize">
+      <ion-title  id="titulo" >{{titulo}}</ion-title>
+    </div>
   </ion-toolbar>
 </ion-header>

@@ -20,6 +20,7 @@ import { ComponentsModule } from '../../components/components.module';
     Tab3PageRoutingModule,
     ComponentsModule
   ],
+  entryComponents: [],
   declarations: [Tab3Page]
 })
 export class Tab3PageModule {}

@@ -22,10 +22,23 @@ const routes: Routes = [
     path: 'sitios-turisticos',
     loadChildren: () => import('./pages/sitios-turisticos/sitios-turisticos.module').then( m => m.SitiosTuristicosPageModule)
   },
-  {
-    path: 'login',
-    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+ {
+    path: 'musica',
+    loadChildren: () => import('./pages/musica/musica.module').then( m => m.MusicaPageModule)
   },
+  {
+    path: 'negocio',
+    loadChildren: () => import('./pages/negocio/negocio.module').then( m => m.NegocioPageModule)
+  },
+  {
+    path: 'historia',
+    loadChildren: () => import('./pages/historia/historia.module').then( m => m.HistoriaPageModule)
+  },
+  {
+    path: 'inicio',
+    loadChildren: () => import('./pages/inicio/inicio.module').then( m => m.InicioPageModule)
+  },
+
 ];
 @NgModule({
   imports: [

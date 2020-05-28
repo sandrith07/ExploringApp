@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { SitiosTuristicosPageRoutingModule } from './sitios-turisticos-routing.module';
+import { NegocioPageRoutingModule } from './negocio-routing.module';
 
-import { SitiosTuristicosPage } from './sitios-turisticos.page';
+import { NegocioPage } from './negocio.page';
 import { ComponentsModule } from '../../components/components.module';
 
 @NgModule({
@@ -14,9 +14,9 @@ import { ComponentsModule } from '../../components/components.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    SitiosTuristicosPageRoutingModule,
+    NegocioPageRoutingModule,
     ComponentsModule
   ],
-  declarations: [SitiosTuristicosPage]
+  declarations: [NegocioPage]
 })
-export class SitiosTuristicosPageModule {}
+export class NegocioPageModule {}

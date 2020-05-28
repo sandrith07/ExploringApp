@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { LoginPageRoutingModule } from './login-routing.module';
+import { MusicaPageRoutingModule } from './musica-routing.module';
 
-import { LoginPage } from './login.page';
+import { MusicaPage } from './musica.page';
 import { ComponentsModule } from '../../components/components.module';
 
 @NgModule({
@@ -14,9 +14,9 @@ import { ComponentsModule } from '../../components/components.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    LoginPageRoutingModule,
+    MusicaPageRoutingModule,
     ComponentsModule
   ],
-  declarations: [LoginPage]
+  declarations: [MusicaPage]
 })
-export class LoginPageModule {}
+export class MusicaPageModule {}
