@@ -1,7 +1,12 @@
-<ion-header [translucent]="true">
-  <app-header></app-header>
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/tab3"></ion-back-button>
+    </ion-buttons>
+    <app-header></app-header>
+  </ion-toolbar>
 </ion-header>
-<ion-content>
-<h2>Historia</h2>
+<ion-content fullscreen >
+    <ion-text id="text">Historia</ion-text>
+  <ion-searchbar animated></ion-searchbar>
 </ion-content>
-
