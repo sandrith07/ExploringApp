@@ -1,3 +1,64 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-menu side="start" menuId="first" contentId="main">
+    <ion-header>
+      <ion-toolbar color="primary">
+        <!-- <ion-title>Start Menu</ion-title> -->
+        
+      <div class="row margin-0 center-xs">
+        <!-- <ion-card class="borde-radio-64 margin-bottom-0" mode="ios"> -->
+        <img src="https://cdn.pixabay.com/photo/2016/11/18/23/38/child-1837375_960_720.png" class="avatar-80">
+          
+        <!-- </ion-card> -->
+        <!-- <ion-avatar>
+            <img src="https://cdn.pixabay.com/photo/2016/11/18/23/38/child-1837375_960_720.png">
+          </ion-avatar> -->
+      </div>
+    <div class="row margin-0 center-xs">
+      <ion-text>
+        <small>{{user ? user["email"] : ''}}</small>
+        
+
+      </ion-text>
+    </div>
+
+    <!-- fin dise;o -->
+      </ion-toolbar>
+
+    </ion-header>
+    <ion-content>
+      <ion-list lines="none">
+        <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
+          <ion-item routerDirection="root" [routerLink]="[p.url]">
+            <ion-icon slot="start" [src]="p.icon" size = "large"></ion-icon>
+            <ion-label>
+              {{p.title}}
+            </ion-label>
+          </ion-item>
+          
+        </ion-menu-toggle>
+        <ion-list-header>
+            <ion-label>Configuracion</ion-label>
+          </ion-list-header>
+
+        
+          
+        
+          
+          
+      
+        <ion-item (click)="cerrarSesion()" href="">
+
+            <ion-icon slot="start" name="exit-outline"></ion-icon>
+            <ion-label>
+              Cerrar sesión
+            </ion-label>
+          </ion-item>
+
+            
+          
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="main"></ion-router-outlet>
+  
 </ion-app>

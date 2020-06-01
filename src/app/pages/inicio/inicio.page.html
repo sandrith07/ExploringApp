@@ -1,4 +1,43 @@
-<app-header titulo="Inicio"></app-header>
+<app-header titulo="Inicio" tipoHeader="menu"></app-header>
 <ion-content>
-  <app-inicio-sesion></app-inicio-sesion>
+  <div *ngIf="user">
+    
+   <ion-card>
+    <ion-card-header>
+      <div class="row margin-0 center-xs">
+        <!-- <ion-card class="borde-radio-64 margin-bottom-0" mode="ios"> -->
+        <img src="assets/icon/user.png" class="avatar-80">
+      </div>
+      <div class="row margin-0 center-xs">
+        <ion-text>
+          <small>{{user ? user["email"] : ''}}</small>
+        </ion-text>
+      </div>
+    </ion-card-header>
+    <ion-card-content>
+      
+      
+      <ion-list>
+        <ion-item >
+          <ion-label position="floating" >Usuario</ion-label>
+          <ion-input type="text" value="Aqui va el usuarurio" disabled></ion-input>
+        </ion-item>
+        
+        <ion-item >
+          <ion-label position="floating" >Nombre</ion-label>
+          <ion-input type="text" value="Aqui va el usuarurio" disabled></ion-input>
+        </ion-item>
+        <br>
+          <ion-button expand="block" color="secondary" >Actualizar datos</ion-button>
+        <br>
+      </ion-list>
+
+    </ion-card-content>
+   </ion-card>
+
+  </div>
+  <div *ngIf="!user">
+    <app-inicio-sesion></app-inicio-sesion>
+  </div>
+  
 </ion-content>

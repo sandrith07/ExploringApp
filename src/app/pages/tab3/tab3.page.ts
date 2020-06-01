@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ToastController} from '@ionic/angular';
-import {PopoverController} from '@ionic/angular'
+import { PopoverController } from '@ionic/angular'
 import { PopoverComponent } from '../../components/popover/popover.component';
-import { Tema } from '../../interfaces/Tema'
 import {ActivatedRoute, Router} from '@angular/router';
+
 
 @Component({
   selector: 'app-tab3',
@@ -11,7 +11,7 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page {
-  accion = 'todos';
+   accion = 'todos';
   visible = false;
   /*
   tema: Tema = {

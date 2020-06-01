@@ -6,6 +6,6 @@
       font-display: swap;
     }
     ion-tab-bar{
-        --color-selected: #03AAFE !important;
+        --color-selected: var(--ion-color-primary);
         
     }

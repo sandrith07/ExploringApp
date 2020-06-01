@@ -2,5 +2,31 @@
   <app-header titulo="Eventos anuales" tipoHeader="back"></app-header>
 </ion-toolbar>
 <ion-content fullscreen >
-  <ion-searchbar animated></ion-searchbar>
+  <ion-searchbar animated [(ngModel)]="filtro" (ionChange)="filtrarEventos()"></ion-searchbar>
+
+  <div *ngIf="!eventosTiempoReal">
+    <ion-card mode="ios" class=" borde-radio-10 ">
+      <ion-card-header mode="ios">
+        <ion-card-title mode="ios" color="primary"><ion-skeleton-text animated style="width: 88%" class="borde-radio-10"></ion-skeleton-text></ion-card-title>
+        <ion-card-subtitle mode="ios" color="secondary"><ion-skeleton-text animated style="width: 60%" class="borde-radio-10"></ion-skeleton-text></ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
+  </div>
+
+  <div *ngIf="eventosTiempoReal">
+    <ion-card class=" borde-radio-10 " *ngFor="let evento of eventosFiltrados">
+      <ion-card-header >
+        <ion-card-title  color="dark" id="titulo" class="ion-text-capitalize">{{eventosTiempoReal[evento]?.nombre}}</ion-card-title>      
+      </ion-card-header>
+      <ion-item href="{{eventosTiempoReal[evento]?.url}}">
+        <ion-icon name="link" slot="start"></ion-icon>
+      <ion-card-subtitle >{{eventosTiempoReal[evento]?.url}}</ion-card-subtitle>
+      </ion-item>
+      <ion-card-content >
+        <ion-card-subtitle class="ion-text-justify">{{eventosTiempoReal[evento]?.descripcion}}</ion-card-subtitle>
+      </ion-card-content>
+              
+
+    </ion-card>
+  </div>
 </ion-content>
