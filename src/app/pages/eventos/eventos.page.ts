@@ -13,7 +13,7 @@ export class EventosPage implements OnInit {
 
 
   constructor(){
-    this.consultarHistoriasTiempoReal()
+    this.consultarEventosTiempoReal()
   }
 
   ngOnInit(){
@@ -25,7 +25,8 @@ export class EventosPage implements OnInit {
 
 
 
-  consultarHistoriasTiempoReal(){
+
+  consultarEventosTiempoReal(){
     console.log('entre a consulta tiempo real');
 
     firebase.database().ref('eventoanual').on('value', (datos)=>{
@@ -60,4 +61,10 @@ export class EventosPage implements OnInit {
     }
   }
 
+
+
+
 }
+
+
+
