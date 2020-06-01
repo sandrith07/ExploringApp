@@ -1,6 +1,32 @@
 <ion-toolbar>
-  <app-header titulo="Negocios" tipoHeader="back"></app-header>
+  <app-header titulo="Sitios Turisticos" tipoHeader="back"></app-header>
 </ion-toolbar>
 <ion-content fullscreen >
-  <ion-searchbar animated></ion-searchbar>
+  <ion-searchbar animated [(ngModel)]="filtro" (ionChange)="filtrarSitios()"></ion-searchbar>
+
+  <div *ngIf="!sitiosTiempoReal">
+    <ion-card mode="ios" class=" borde-radio-10 ">
+      <ion-card-header mode="ios">
+        <ion-card-title mode="ios" color="primary"><ion-skeleton-text animated style="width: 88%" class="borde-radio-10"></ion-skeleton-text></ion-card-title>
+        <ion-card-subtitle mode="ios" color="secondary"><ion-skeleton-text animated style="width: 60%" class="borde-radio-10"></ion-skeleton-text></ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
+  </div>
+
+  <div *ngIf="sitiosTiempoReal">
+    <ion-card class=" borde-radio-10 " *ngFor="let sitio of sitiosFiltrados">
+      <ion-card-header >
+        <ion-card-title  color="dark" id="titulo" class="ion-text-capitalize">{{sitiosTiempoReal[sitio]?.nombre}}</ion-card-title>
+        
+          <ion-item >
+            <ion-icon name="locate" slot="start"></ion-icon>
+          <ion-card-subtitle>{{sitiosTiempoReal[sitio]?.direccion}}</ion-card-subtitle>
+          </ion-item>
+        
+      </ion-card-header>
+      <ion-card-content>
+        <p color="dark" id="subtitle" class="ion-text-justify">{{sitiosTiempoReal[sitio]?.descripcion}}</p>      
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>

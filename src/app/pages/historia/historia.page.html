@@ -1,6 +1,33 @@
-<ion-toolbar>
+
   <app-header titulo="Historia" tipoHeader="back"></app-header>
-</ion-toolbar>
+
+
 <ion-content fullscreen >
-  <ion-searchbar animated></ion-searchbar>
+  <ion-searchbar animated [(ngModel)]="filtro" (ionChange)="filtrarHistorias()"></ion-searchbar>
+
+  <div *ngIf="!historiasTiempoReal">
+    <ion-card mode="ios" class=" borde-radio-10 ">
+      <ion-card-header mode="ios">
+        <ion-card-title mode="ios" color="primary"><ion-skeleton-text animated style="width: 88%" class="borde-radio-10"></ion-skeleton-text></ion-card-title>
+        <ion-card-subtitle mode="ios" color="secondary"><ion-skeleton-text animated style="width: 60%" class="borde-radio-10"></ion-skeleton-text></ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
+  </div>
+
+  <div *ngIf="historiasTiempoReal">
+    <ion-card class=" borde-radio-10 " *ngFor="let historia of historiasFiltradas">
+      <ion-card-header >
+        <ion-card-title  color="dark" id="titulo" class="ion-text-capitalize">{{historiasTiempoReal[historia]?.nombre}}</ion-card-title>      
+      </ion-card-header>
+      <ion-item href="{{historiasTiempoReal[historia]?.url}}">
+        <ion-icon name="link" slot="start" color="primary"></ion-icon>
+      <ion-card-subtitle color="primary">{{historiasTiempoReal[historia]?.url}}</ion-card-subtitle>
+      </ion-item>
+      <ion-card-content >
+        <ion-card-subtitle class="ion-text-justify">{{historiasTiempoReal[historia]?.descripcion}}</ion-card-subtitle>
+      </ion-card-content>
+              
+
+    </ion-card>
+  </div>
 </ion-content>

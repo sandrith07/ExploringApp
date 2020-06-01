@@ -1,24 +1,81 @@
-<ion-content class="ion-padding">
-  <h2 class="ion-text-capitalize">Iniciar Sesion</h2>
-  <ion-list>
-    <ion-item id="input_redondeado">
-      <ion-label position="floating">Usuario</ion-label>
-      <ion-input type="text" class="input_redondeado"></ion-input>
-    </ion-item>
-    
-    <ion-item id="input_redondeado">
-      <ion-label position="floating" >Contraseña</ion-label>
-      <ion-input type="password" ></ion-input>
-    </ion-item>
-    
-  </ion-list>
+<div  class="center">
 
-    <ion-button expand="block" id="btn_logueo">Entrar</ion-button>
-    <ion-text>
-      <hr>
-      <p></p>
-      <p id="parrafo">Ó</p>
-    </ion-text>
-    <ion-button fill="outline" expand="block" class="btn_google">Entrar con Google<ion-icon name="logo-google"></ion-icon></ion-button>
-    <ion-button  fill="outline" expand="block"  id="btn_registrarse">Registrarse</ion-button>
-</ion-content>
+    <ion-card class=" borde-radio-10">
+      <div text-center id="user">
+         
+      </div>
+      <ion-segment [(ngModel)]="accion" color="secondary">
+        <ion-segment-button value="iniciar" id="titulo" >Iniciar</ion-segment-button>
+        <ion-segment-button value="registrar" id="titulo">Registrar</ion-segment-button>
+      </ion-segment>
+
+     
+    
+    <div *ngIf="accion =='iniciar'" class="ion-padding">
+        <ion-list>
+          <ion-item >
+            <ion-label position="floating" >Usuario</ion-label>
+            <ion-input type="text" [(ngModel)]="correo"></ion-input>
+          </ion-item>
+          
+          <ion-item >
+            <ion-label position="floating" >Contraseña</ion-label>
+            <ion-input type="password" [(ngModel)]="contrasena"></ion-input>
+          </ion-item>
+          
+        </ion-list>
+        <br>
+          <ion-button expand="block" color="secondary"   (click)="login()" >Iniciar Sesión</ion-button>
+        <br>
+        <p>
+          Ó 
+        </p>
+        <p>
+          Inicia con: 
+        </p>
+        
+        <div class="row margin-0 center-xs">
+          <ion-img src="assets/icon/facebook.png" alt="" class="redes" href="#"></ion-img>
+           <ion-img src="assets/icon/google.png" alt="" class="redes" href="#"></ion-img>  
+        </div>
+        
+    </div>
+    <div *ngIf="accion =='registrar'"  class="ion-padding">
+     <br>
+    
+        <ion-list>
+          <ion-item >
+            <ion-label position="floating" >Usuario</ion-label>
+            <ion-input type="text" [(ngModel)]="correo"></ion-input>
+          </ion-item>
+          <ion-item >
+           <ion-label position="floating">Nombre Completo</ion-label>
+           <ion-input type="text" [(ngModel)]="nombre"></ion-input>
+         </ion-item>
+          
+          <ion-item >
+            <ion-label position="floating" >Contraseña</ion-label>
+            <ion-input type="password"  [(ngModel)]="contrasena"></ion-input>
+          </ion-item>
+          
+        </ion-list>
+       
+      <br>
+        <ion-button expand="block" color="secondary"   (click)="registro()">Registrarse</ion-button>
+      <br>
+       <p>
+          Ó 
+        </p>
+        <p>
+          Registrate con: 
+        </p>
+        
+        <div class="row margin-0 center-xs">
+          <ion-img src="assets/icon/facebook.png" alt="" class="redes" href="#"></ion-img>
+           <ion-img src="assets/icon/google.png" alt="" class="redes" href="#"></ion-img>  
+        </div>
+    
+    </div>
+    </ion-card>
+  
+</div>

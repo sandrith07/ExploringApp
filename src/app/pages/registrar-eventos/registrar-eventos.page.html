@@ -1,0 +1,47 @@
+<app-header titulo="Registrar Eventos" tipoHeader="backeventos"></app-header>
+
+
+<ion-content padding="true" >
+ 
+ <ion-card>
+  <ion-list>
+    <ion-item >
+      <ion-label position="floating" >Nombre</ion-label>
+      <ion-input type="text" ></ion-input>
+    </ion-item>
+    <ion-item >
+      <ion-label position="floating" >Descripción</ion-label>
+      <ion-input type="text" ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Municipio</ion-label>
+      <ion-select value="Municipios" okText="Okay" cancelText="Dismiss">
+        <ion-select-option value="brown">Brown</ion-select-option>
+        <ion-select-option value="blonde">Blonde</ion-select-option>
+        <ion-select-option value="black">Black</ion-select-option>
+        <ion-select-option value="red">Red</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item >
+      <ion-label position="floating" >Dirección</ion-label>
+      <ion-input type="text" ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Fecha de inicio</ion-label>
+      <ion-datetime value="2020-02-21" placeholder="Seleccionar fecha"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label>Fecha Fin</ion-label>
+      <ion-datetime value="2020-02-21" placeholder="Seleccionar fecha"></ion-datetime>
+    </ion-item>
+    <br>
+          <ion-button expand="block" color="secondary"  >Guardar</ion-button>
+     <br>
+  </ion-list>
+
+ </ion-card>
+
+ 
+</ion-content>

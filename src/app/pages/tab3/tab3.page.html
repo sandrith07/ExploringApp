@@ -1,20 +1,16 @@
 
 <ion-toolbar>
   <ion-header [translucent]="true">
-    <app-header titulo="temas de interés"></app-header>
+    <app-header titulo="temas de interés" tipoHeader="menu"></app-header>
   </ion-header>
-  <ion-buttons slot="end">
-    <ion-button (click)="presentPopover($event)">
-      <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-vertical"></ion-icon>
-    </ion-button>
-  </ion-buttons>
+
   
 </ion-toolbar>
-<ion-segment [(ngModel)]="accion" color="titulo" >
+<ion-segment [(ngModel)]="accion" color="primary" >
   <ion-segment-button value="todos" id="titulo" >Todos</ion-segment-button>
   <ion-segment-button value="favoritos" id="titulo">Favoritos</ion-segment-button>
 </ion-segment>
-<ion-content class="background" center *ngIf="accion=='todos'">
+<ion-content  center *ngIf="accion=='todos'">
 
   <ion-card class="welcome-card"  >  
         <ion-card-header class="background-eventos"  [routerLink]="['/tabs/eventos']">
@@ -32,7 +28,7 @@
       </ion-toolbar>     
   </ion-card>
   <ion-card class="welcome-card"  >  
-    <ion-card-header class="background-sitio"  [routerLink]="['/tabs/sitio-turistico']">
+    <ion-card-header class="background-sitio"  [routerLink]="['/tabs/sitios-turisticos']">
       <ion-card-title ><h2>Sitios Turisticos</h2></ion-card-title>
     </ion-card-header>
   <ion-toolbar>
@@ -42,7 +38,7 @@
           <ion-icon name="heart" *ngIf="visible" class="icono-favorito-select"></ion-icon></h2>
       </ion-button>
     </ion-buttons> 
-    <ion-card-subtitle id="subtitle">Explora más lugares</ion-card-subtitle> 
+    <ion-card-subtitle id="subtitle" >Explora más lugares</ion-card-subtitle> 
      
   </ion-toolbar>     
   </ion-card>
@@ -94,13 +90,13 @@
 </ion-content>
 
 
-<ion-content class="background" center *ngIf="accion=='favoritos'">
+<ion-content center *ngIf="accion=='favoritos'">
 
-<div id="card"><ion-card class="welcome-card" [routerLink]="['/tabs/tab3']" class="background">
+<ion-card class="welcome-card" [routerLink]="['/tabs/tab3']" >
   <br>
   <ion-chip outline color="titulo">
     <ion-label color="titulo">No hay nada en la lista de Favoritos</ion-label>
   </ion-chip>
-</ion-card></div>
+</ion-card>
 
 </ion-content>

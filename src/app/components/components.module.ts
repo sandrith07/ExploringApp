@@ -5,7 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './login/login.component';
 import { InicioSesionComponent } from './inicio-sesion/inicio-sesion.component';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -14,15 +14,19 @@ import { InicioSesionComponent } from './inicio-sesion/inicio-sesion.component';
     MenuComponent,
     HeaderComponent,
     LoginComponent,
-    InicioSesionComponent
+    InicioSesionComponent,
+
+
   ],
   exports:[
     MenuComponent,
     HeaderComponent,
     LoginComponent,
-    InicioSesionComponent
+    InicioSesionComponent,
+
   ],
   imports: [
+    FormsModule, ReactiveFormsModule,
     CommonModule,
     IonicModule
   ]

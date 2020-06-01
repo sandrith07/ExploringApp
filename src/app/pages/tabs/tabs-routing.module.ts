@@ -52,6 +52,10 @@ const routes: Routes = [
         loadChildren: () => import('../historia/historia.module').then(m => m.HistoriaPageModule)
       },
       {
+        path: 'registrar-eventos',
+        loadChildren: () => import('../registrar-eventos/registrar-eventos.module').then(m => m.RegistrarEventosPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/ultimas-noticias',
         pathMatch: 'full'
