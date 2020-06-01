@@ -56,6 +56,10 @@ const routes: Routes = [
         loadChildren: () => import('../registrar-eventos/registrar-eventos.module').then(m => m.RegistrarEventosPageModule)
       },
       {
+        path: 'noticia',
+        loadChildren: () => import('../noticia/noticia.module').then(m => m.NoticiaPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/ultimas-noticias',
         pathMatch: 'full'

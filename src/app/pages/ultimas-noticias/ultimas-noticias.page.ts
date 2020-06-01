@@ -12,7 +12,9 @@ import * as firebase from 'firebase';
 })
 export class UltimasNoticiasPage implements OnInit {
 
-  constructor() { }
+  constructor() {
+    this.consultarNoticiaTiempoReal()
+   }
   accion="dejar"
   ngOnInit() {
   }
@@ -33,5 +35,50 @@ export class UltimasNoticiasPage implements OnInit {
       }
     })
   }
+
+
+  keys(objeto: Object){
+    return Object.keys((objeto || {})) 
+  }
+
+  noticia
+  noticiaTiempoReal
+  
+  consultarNoticiaTiempoReal(){
+    console.log('entre a consulta tiempo real');
+
+    firebase.database().ref('eventos').on('value', (datos)=>{
+      console.log('entre a firebase consulta');
+      
+      if(datos.exists()){
+        this.noticiaTiempoReal = datos.val()
+        this.noticiaFiltrada = Object.keys(this.noticiaTiempoReal)
+        console.log('eventos tiempo real -', this.noticiaTiempoReal);
+
+      }else{
+        this.noticiaTiempoReal = {}
+        this.noticiaFiltrada = []
+        console.log('eventos tiempo real vacios');
+        
+      }
+    },(erro)=>{
+      this.noticiaTiempoReal = {}
+      console.log('ocurrio el siguiente error al tratar de leer los datos de eventos ', erro);
+      
+    })
+  }
+
+  filtro
+  noticiaFiltrada
+
+  filtrarNoticia(){
+    if(!this.filtro || this.filtro == ""){
+      this.noticiaFiltrada = Object.keys(this.noticiaTiempoReal || {})
+    }else if(this.filtro != ""){
+      this.noticiaFiltrada = this.keys(this.noticiaTiempoReal).filter((noticia) => (this.noticiaTiempoReal[noticia].nombre).toString().toLowerCase().includes((this.filtro).toString().toLowerCase()))
+
+    }
+  }
+
 
 }

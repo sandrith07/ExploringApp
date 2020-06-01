@@ -10,13 +10,15 @@ import { PerfilComponent } from './perfil/perfil.component';
 
 
 
+
 @NgModule({
   declarations: [
     MenuComponent,
     HeaderComponent,
     LoginComponent,
     InicioSesionComponent,
-    PerfilComponent
+    PerfilComponent,
+  
 
 
   ],
@@ -25,7 +27,8 @@ import { PerfilComponent } from './perfil/perfil.component';
     HeaderComponent,
     LoginComponent,
     InicioSesionComponent,
-    PerfilComponent
+    PerfilComponent,
+
 
   ],
   imports: [
