@@ -19,8 +19,8 @@
   <div *ngIf="negociosTiempoReal">
     <ion-card class=" borde-radio-10 " *ngFor="let negocio of negociosFiltrados">
       <ion-item >
-        <ion-icon name="star" slot="end" color="warning" *ngIf="negociosTiempoReal[negocio]?.favorito" (click)="toggleDelete(negocio)"></ion-icon>
-        <ion-icon name="star-outline" slot="end" color="warning" *ngIf="!negociosTiempoReal[negocio]?.favorito" (click)="toggleAdd(negocio)"></ion-icon>
+        <ion-icon name="star" slot="end" color="warning" *ngIf="negociosTiempoReal[negocio]?.favorito" (click)="toggleDelete(negociosTiempoReal)"></ion-icon>
+        <ion-icon name="star-outline" slot="end" color="warning" *ngIf="!negociosTiempoReal[negocio]?.favorito" (click)="toggleAdd(negociosTiempoReal[negocio], negocio)"></ion-icon>
         <ion-card-title  color="dark" id="titulo" class="ion-text-capitalize">{{negociosTiempoReal[negocio]?.nombre}}</ion-card-title>      
       </ion-item>
      

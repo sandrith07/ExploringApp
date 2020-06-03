@@ -16,6 +16,7 @@ export class NegocioPage implements OnInit {
   negociosFavoritos
 
   constructor(private toastCtrl: ToastController,){
+    this.comprobarSesion(),
     this.consultarSitiosTiempoReal()
   }
 
@@ -83,7 +84,13 @@ export class NegocioPage implements OnInit {
  
 
   visible = false;
-  
+  uid;
+  nombre;
+  descripcion;
+  direccion;
+  tipo;
+  user
+
   toggleDelete(negocio) {
     firebase.database().ref('negocios/'+negocio+ '/favorito').set({
       favorito: null,
@@ -91,9 +98,52 @@ export class NegocioPage implements OnInit {
     this.showToast('eliminado');
    }
 
-   toggleAdd(negocio) {
-    firebase.database().ref('negocios/'+negocio+ '/favorito').set({
-      favorito: true,
+   comprobarSesion(){
+    firebase.auth().onAuthStateChanged((user)=>{
+      if(user){
+        //usuario logueado
+        this.user = user;
+        this.user['administrador'] = false;
+        console.log("usuario",this.user.uid);
+         
+        this.getTipoUsuario();
+        console.log('usuarios logueado');
+
+      }else{
+        // usuario con sesion no activa
+        this.user = null
+        console.log('usuario no logueado');
+        
+      }
+    })
+  }
+
+
+
+  public getTipoUsuario(){
+    console.log("Get Tipo usuario");
+    
+    firebase.database().ref('/administradores/'+this.user.uid).once('value').then(
+    (datos)=>{
+      console.log("tipo de usuario: ", datos.val());
+      if(datos.exists()){
+        this.user['administrador'] = true;
+      }else{
+        this.user['administrador'] = false;
+      }      
+    }).catch((erro)=>{
+      console.log('ocurrio error en tipo usuario ', erro);
+    })
+  }
+
+   toggleAdd(negociod, negocio) {
+    console.log('Id del negocio', negocio)
+    console.log('datos del negocio', negociod);
+    firebase.database().ref('usuarios/'+this.user.uid+ '/favorito/').push({
+      "direccion": negociod.direccion,
+      "tipo": negociod.tipo,
+      "nombre": negociod.nombre
+
     })
     this.showToast('Añadido');
    }

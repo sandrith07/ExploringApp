@@ -30,7 +30,7 @@ export class Tab3Page {
 
   ) {
    this.comprobarSesion();
-   this.consultarSitiosFavoritos()
+   
   }
 
   keys(objeto: Object){
@@ -40,7 +40,7 @@ export class Tab3Page {
   consultarSitiosTiempoReal(){
     console.log('entre a consulta tiempo real');
 
-    firebase.database().ref('negocios').on('value', (datos)=>{
+    firebase.database().ref('usuarios/favoritos').on('value', (datos)=>{
       console.log('entre a firebase consulta');
       
       if(datos.exists()){
@@ -60,7 +60,7 @@ export class Tab3Page {
       
     })
   }
-
+  user
   filtro
   negociosFiltrados
   filtrarNegocios(){
@@ -77,9 +77,9 @@ export class Tab3Page {
   consultarSitiosFavoritos(){
     console.log('entre a consulta tiempo real favoritos');
 
-    firebase.database().ref('negocios').on('value', (datos)=>{
+    firebase.database().ref('usuarios/'+this.user.uid+'/favorito').on('value', (datos)=>{
       console.log('entre a firebase consulta favoritos');
-      
+      console.log(this.user);
       if(datos.exists()){
         this.negociosFavoritos = datos.val()
         console.log(datos.val())
@@ -91,7 +91,7 @@ export class Tab3Page {
       }else{
         this.negociosFavoritos = {}
         this.negociosFavoritos = []
-        console.log('sitios tiempo favoritos real vacios');
+        console.log('sitios tiempo favoritos real favoritos vacios');
         
       }
     },(erro)=>{
@@ -100,14 +100,16 @@ export class Tab3Page {
       
     })
   }
-  user
+ 
   comprobarSesion(){
     firebase.auth().onAuthStateChanged((user)=>{
       if(user){
         //usuario logueado
         this.user = user;
         this.user['administrador'] = false;
-        console.log("usuario",this.user);
+        console.log("usuario",this.user.uid);
+        this.consultarSitiosFavoritos();
+        
         
         this.getTipoUsuario();
         console.log('usuarios logueado');

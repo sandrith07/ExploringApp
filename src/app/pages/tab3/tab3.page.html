@@ -48,11 +48,13 @@
 
 <ion-content center *ngIf="accion=='favoritos'">
     <div *ngIf="negociosFavoritos">
+      <ion-toolbar slot="fixed">
+        <ion-searchbar animated [(ngModel)]="filtro" (ionChange)="filtrarNegocios()"></ion-searchbar>
+      </ion-toolbar>
       <ion-card class=" borde-radio-10 "  *ngFor="let negocio of negociosFiltrados">
  
         <ion-item >
-          <ion-icon name="star" slot="end" color="warning" *ngIf="negociosFavoritos[negocio]?.favorito" (click)="toggleDelete(negocio)"></ion-icon>
-          <ion-icon name="star-outline" slot="end" color="warning" *ngIf="!negociosFavoritos[negocio]?.favorito" (click)="toggleAdd(negocio)"></ion-icon>
+          <ion-icon name="star" slot="end" color="warning"  (click)="toggleDelete(negocio)"></ion-icon>
           <ion-card-title  color="dark" id="titulo" class="ion-text-capitalize">{{negociosFavoritos[negocio]?.nombre}}</ion-card-title>      
         </ion-item>
        
@@ -67,6 +69,5 @@
         </ion-item>
       </ion-card>
   
-    </div>
-    
+    </div>   
 </ion-content>
