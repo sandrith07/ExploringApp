@@ -15,17 +15,18 @@
 
   <div *ngIf="negociosTiempoReal">
     <ion-card class=" borde-radio-10 " *ngFor="let negocio of negociosFiltrados">
-      <ion-card-header >
-        <ion-card-title  color="dark" id="titulo" class="ion-text-capitalize">{{negociosTiempoReal[negocio]?.nombre}}</ion-card-title>      
-      </ion-card-header>
-              
       <ion-item >
-        <ion-icon name="locate" slot="start"></ion-icon>
+        <ion-icon name="heart-outline" slot="end" color="danger"></ion-icon>
+        <ion-card-title  color="dark" id="titulo" class="ion-text-capitalize">{{negociosTiempoReal[negocio]?.nombre}}</ion-card-title>      
+      </ion-item>
+     
+      <ion-item >
+        <ion-icon name="map-outline" slot="start" color="secondary"></ion-icon>
       <ion-card-subtitle>{{negociosTiempoReal[negocio]?.direccion}}</ion-card-subtitle>
       </ion-item>
               
       <ion-item >
-        <ion-icon name="trail-sign-outline" slot="start"></ion-icon>
+        <ion-icon name="trail-sign-outline" slot="start" color="warning"></ion-icon>
       <ion-card-subtitle>{{negociosTiempoReal[negocio]?.tipo}}</ion-card-subtitle>
       </ion-item>
     </ion-card>

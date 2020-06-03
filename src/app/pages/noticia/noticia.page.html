@@ -1,26 +1,69 @@
 <app-header titulo="Detalle de noticia" tipoHeader="backeventos"></app-header>
 
-<ion-content  >
 
-  <ion-card *ngIf="tipo =='detalleT'" class="ion-padding">
+
+<ion-content  >
+   <ion-card *ngIf="user?.administrador" class=" borde-radio-10 ">
+    <ion-list>
+      <ion-item >
+        <ion-label position="floating" >Nombre</ion-label>
+        <ion-input type="text" ></ion-input>
+      </ion-item>
+      <ion-item >
+        <ion-label position="floating"  >Descripción</ion-label>
+        <ion-input type="text" ></ion-input>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label>Municipio</ion-label>
+        <ion-select value="Municipios" okText="Okay" cancelText="Dismiss">
+          <ion-select-option value="brown">Brown</ion-select-option>
+          <ion-select-option value="blonde">Blonde</ion-select-option>
+          <ion-select-option value="black">Black</ion-select-option>
+          <ion-select-option value="red">Red</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item >
+        <ion-label position="floating"  >Dirección</ion-label>
+        <ion-input type="text"></ion-input>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label>Fecha de inicio</ion-label>
+        <ion-datetime value="2020-02-21" placeholder="Seleccionar fecha"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>Fecha Fin</ion-label>
+        <ion-datetime value="2020-02-21" placeholder="Seleccionar fecha" ></ion-datetime>
+      </ion-item>
+      <br>
+            <ion-button expand="block" color="secondary" >Actualizar</ion-button>
+       <br>
+    </ion-list>
+  
+   </ion-card>
+   <ion-card *ngIf="!user?.administrador" class=" borde-radio-10 ">
+    <ion-title color="dark" id="titulo" class="ion-text-capitalize">{{evento?.nombre}}</ion-title>
+    <ion-card-header>
+    <ion-img src="{{evento?.imagen}}"></ion-img>
+    </ion-card-header>
     <ion-item>
       <ion-icon name="calendar-outline" slot="start" color="secondary"></ion-icon>
-      <ion-label></ion-label>
+      <ion-label>{{evento?.fechainicio}} - {{evento?.fechafin}}</ion-label>
       </ion-item>
         <ion-item>
-          <ion-icon name="locate-outline" slot="start" color="verde"></ion-icon>
-          <ion-label></ion-label>
+          <ion-icon name="map-outline" slot="start" color="verde"></ion-icon>
+          <ion-label>{{evento?.lugar}}</ion-label>
         </ion-item>
-        <ion-item>
-          <ion-icon name="map-outline" slot="start" color="azul"></ion-icon>
-          <ion-label></ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-icon name="newspaper-outline" slot="start" color="lila"></ion-icon>
-          <ion-label></ion-label>
-        </ion-item>
-   </ion-card>
+          <ion-card-content>
+  
+              {{evento?.descripcion}}
+  
+          </ion-card-content>
+      
+  </ion-card>
 </ion-content>
+
 
 
 

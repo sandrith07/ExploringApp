@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
 import { Validators } from '@angular/forms';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-registrar-eventos',
@@ -9,7 +10,7 @@ import { Validators } from '@angular/forms';
 })
 export class RegistrarEventosPage implements OnInit {
 
-  constructor() { 
+  constructor(public alertController: AlertController) { 
     this.comprobarSesion()
   }
 
@@ -48,13 +49,45 @@ export class RegistrarEventosPage implements OnInit {
     "direccion": this.direccion,
     "fechainicio": this.fechainicio,
     "fechafin": this.fechafin,
-    
-    
     }).catch((error) =>{
       console.log('ocurrio un error al intentar crear un evento =>',error);
+      this.alertEventoNoGuardado()
     });
-  
   }
 
+  async alertEventoGuardado() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Evento Guardado con Exito',
+      message: '<strong>Ha ocurrido un error al intentar publicar el evento, por favor intente más tarde</strong>!!!',
+      buttons: [
+       {
+          text: 'Ok',
+          handler: () => {
+            console.log('Confirmar Ok');
+          }
+        }
+      ]
+    });
 
+    await alert.present();
+  }
+
+  async alertEventoNoGuardado() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Error al publicar un evento',
+      message: '<strong>Ha ocurrido un error al intentar publicar el evento, por favor intente más tarde</strong>!!!',
+      buttons: [
+       {
+          text: 'Ok',
+          handler: () => {
+            console.log('Confirmar Ok');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
 }

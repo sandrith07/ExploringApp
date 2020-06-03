@@ -74,6 +74,7 @@ h2{
   font-family: RobotoSlab;
   font-weight: 400;
   font-display: swap;
+  color: white;
 }
 
 ion-card.background{
@@ -101,12 +102,10 @@ ion-card-header.background-musica{
 
 ion-card-header.background-historia{
   --background: url(src/assets/img/historia.jpeg) 0 0/100% ;
-  background-color:#03AEFE;
   height: 120px;
 }
 ion-card-header.background-sitio{
   --background: url(src/assets/img/sitios.jpeg) 0 0/100% ;
-  background-color:#03AEFE;
   height: 120px;
 }
 ion-card-header.background-negocio{

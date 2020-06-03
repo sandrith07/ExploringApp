@@ -8,84 +8,41 @@
 </ion-toolbar>
 <ion-segment [(ngModel)]="accion" color="primary" >
   <ion-segment-button value="todos" id="titulo" >Todos</ion-segment-button>
-  <ion-segment-button value="favoritos" id="titulo">Favoritos</ion-segment-button>
+  <ion-segment-button value="favoritos" id="titulo" *ngIf="user">Favoritos</ion-segment-button>
+  <ion-segment-button value="favoritos" id="titulo" *ngIf="!user" disabled>Favoritos</ion-segment-button>
 </ion-segment>
+
 <ion-content  center *ngIf="accion=='todos'">
 
   <ion-card class="welcome-card"  >  
         <ion-card-header class="background-eventos"  [routerLink]="['/tabs/eventos']">
           <ion-card-title ><h2>Eventos</h2></ion-card-title>
-        </ion-card-header>
-      <ion-toolbar>
-        <ion-buttons slot="end">
-          <ion-button (click)="toggle()">
-              <h2><ion-icon name="heart-outline" *ngIf="!visible" class="icono-favorito" color="dark"></ion-icon>
-              <ion-icon name="heart" *ngIf="visible" class="icono-favorito-select"></ion-icon></h2>
-          </ion-button>
-        </ion-buttons> 
-        <ion-card-subtitle id="subtitle">Conoce los eventos anuales realizados</ion-card-subtitle> 
-         
-      </ion-toolbar>     
+          <ion-card-subtitle id="subtitle" >Conoce los eventos realizados anualmente</ion-card-subtitle> 
+        </ion-card-header> 
   </ion-card>
   <ion-card class="welcome-card"  >  
     <ion-card-header class="background-sitio"  [routerLink]="['/tabs/sitios-turisticos']">
       <ion-card-title ><h2>Sitios Turisticos</h2></ion-card-title>
+      <ion-card-subtitle id="subtitle" >Explora más lugares</ion-card-subtitle> 
     </ion-card-header>
-  <ion-toolbar>
-    <ion-buttons slot="end">
-      <ion-button (click)="toggle()">
-          <h2><ion-icon name="heart-outline" *ngIf="!visible" class="icono-favorito" color="dark"></ion-icon>
-          <ion-icon name="heart" *ngIf="visible" class="icono-favorito-select"></ion-icon></h2>
-      </ion-button>
-    </ion-buttons> 
-    <ion-card-subtitle id="subtitle" >Explora más lugares</ion-card-subtitle> 
-     
-  </ion-toolbar>     
   </ion-card>
   <ion-card class="welcome-card"  >  
       <ion-card-header class="background-negocio"  [routerLink]="['/tabs/negocio']">
         <ion-card-title ><h2>Negocios </h2></ion-card-title>
-      </ion-card-header>
-    <ion-toolbar>
-      <ion-buttons slot="end">
-        <ion-button (click)="toggle()">
-            <h2><ion-icon name="heart-outline" *ngIf="!visible" class="icono-favorito" color="dark"></ion-icon>
-            <ion-icon name="heart" *ngIf="visible" class="icono-favorito-select"></ion-icon></h2>
-        </ion-button>
-      </ion-buttons> 
-      <ion-card-subtitle id="subtitle">Explora más lugares</ion-card-subtitle> 
-       
-    </ion-toolbar>     
+        <ion-card-subtitle id="subtitle" >Conoce más lugares</ion-card-subtitle> 
+      </ion-card-header>   
   </ion-card>
   <ion-card class="welcome-card"  >  
         <ion-card-header class="background-musica"  [routerLink]="['/tabs/musica']">
           <ion-card-title ><h2>Musica</h2></ion-card-title>
+          <ion-card-subtitle id="subtitle" >Escucha los mejores exitos</ion-card-subtitle> 
         </ion-card-header>
-      <ion-toolbar>
-        <ion-buttons slot="end">
-          <ion-button (click)="toggle()">
-              <h2><ion-icon name="heart-outline" *ngIf="!visible" class="icono-favorito" color="dark"></ion-icon>
-              <ion-icon name="heart" *ngIf="visible" class="icono-favorito-select"></ion-icon></h2>
-          </ion-button>
-        </ion-buttons> 
-        <ion-card-subtitle id="subtitle">Escucha las mejores canciones</ion-card-subtitle> 
-         
-      </ion-toolbar>     
   </ion-card>
   <ion-card class="welcome-card"  >  
         <ion-card-header class="background-historia"  [routerLink]="['/tabs/historia']">
           <ion-card-title ><h2>Historia</h2></ion-card-title>
+          <ion-card-subtitle id="subtitle" >Conoce más sobre nuestra historia</ion-card-subtitle> 
         </ion-card-header>
-      <ion-toolbar>
-        <ion-buttons slot="end">
-          <ion-button (click)="toggle()">
-              <h2><ion-icon name="heart-outline" *ngIf="!visible" class="icono-favorito" color="dark"></ion-icon>
-              <ion-icon name="heart" *ngIf="visible" class="icono-favorito-select"></ion-icon></h2>
-          </ion-button>
-        </ion-buttons> 
-        <ion-card-subtitle id="subtitle">Conoce nuestra historia</ion-card-subtitle> 
-         
-      </ion-toolbar>     
   </ion-card>
 </ion-content>
 

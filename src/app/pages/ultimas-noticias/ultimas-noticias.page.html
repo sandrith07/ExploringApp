@@ -1,5 +1,5 @@
 <ion-header [translucent]="true">
-  <app-header titulo="Noticias" tipoHeader="menu"></app-header>
+  <app-header titulo="Novedades" tipoHeader="menu"></app-header>
 </ion-header>
 <ion-content>
   <ion-searchbar animated [(ngModel)]="filtro" (ionChange)="filtrarNoticia()"></ion-searchbar>
@@ -29,10 +29,13 @@
   <div *ngIf="noticiaTiempoReal">
     
 
-    <ion-card class=" borde-radio-10 " *ngFor="let noticia of noticiaFiltrada" [routerLink]="['/tabs/noticia']">
+    <ion-card class=" borde-radio-10 " *ngFor="let noticia of noticiaFiltrada" [routerLink]="['/tabs/noticias/'+ noticia]">
       <ion-card-header >
         <ion-card-title  color="dark" id="titulo" class="ion-text-capitalize">{{noticiaTiempoReal[noticia]?.nombre}}</ion-card-title>      
       </ion-card-header>
+
+        <ion-img src="{{noticiaTiempoReal[noticia]?.imagen}}"></ion-img>
+      
       <ion-item>
         <ion-icon name="calendar-outline" slot="start" color="secondary"></ion-icon>
         <ion-label>{{noticiaTiempoReal[noticia]?.fechainicio}}</ion-label>
@@ -41,17 +44,11 @@
         <ion-icon name="locate-outline" slot="start" color="danger"></ion-icon>
         <ion-label>{{noticiaTiempoReal[noticia]?.lugar}}</ion-label>
       </ion-item>
-
-      <ion-card-content >
-        <ion-card-subtitle class="ion-text-justify">{{noticiaTiempoReal[noticia]?.descripcion}}</ion-card-subtitle>
-      </ion-card-content>
-              
-
     </ion-card>
   </div>
 
 
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="user?.administrador">
     <ion-fab-button>
       <ion-icon name="add" [routerLink]="['/tabs/registrar-eventos']"></ion-icon>
     </ion-fab-button>

@@ -4,6 +4,8 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import * as firebase from 'firebase';
+import { AngularFireDatabase } from '@angular/fire/database';
+
 const firebaseConfig = {
     apiKey: "AIzaSyCBAR8zYU6jsyJ6BQdiMUrfW6bXd0uMXJ8",
     authDomain: "explorinapp-c07f5.firebaseapp.com",
@@ -25,16 +27,16 @@ export class AppComponent {
     {title: 'Perfil',         url: '/tabs/eventos',           icon: '/assets/icon calendar.svg'},
     {title: 'Favoritos',         url: '/tabs/eventos',           icon: '/assets/icon calendar.svg'},
     {title: 'PlayList',         url: '/tabs/eventos',           icon: '/assets/icon calendar.svg'},
-    {title: 'Sitios Turisticos',         url: '/tabs/eventos',           icon: '/assets/icon calendar.svg'},
-    {title: 'Negocios',         url: '/tabs/eventos',           icon: '/assets/icon calendar.svg'},
-    {title: 'Eventos anuales',         url: '/tabs/eventos',           icon: '/assets/icon calendar.svg'},
+    {title: 'Restaurantes',         url: '/tabs/eventos',           icon: '/assets/icon calendar.svg'},
+    {title: 'Discotecas',         url: '/tabs/eventos',           icon: '/assets/icon calendar.svg'},
+    {title: 'Hoteles',         url: '/tabs/eventos',           icon: '/assets/icon calendar.svg'},
 
   ];
 
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
   ) {
     if (!firebase.apps.length) {
       firebase.initializeApp(firebaseConfig);
@@ -54,18 +56,34 @@ export class AppComponent {
   }
 
   user
+  tipoUSer
+
   comprobarSesion(){
     firebase.auth().onAuthStateChanged((user)=>{
       if(user){
         //usuario logueado
-        this.user = user
+        this.user = user;
+        this.user['administrador'] = false;
+        this.getTipoUsuario();
         console.log('usuarios logueado');
-  
+
       }else{
         // usuario con sesion no activa
         this.user = null
         console.log('usuario no logueado');
         
+      }
+    })
+  }
+
+
+
+  public getTipoUsuario(){
+    firebase.database().ref('administradores/'+ this.user.uid).once('value', (datos)=>{
+      if(datos.exists()){
+        this.user['administrador'] = true;
+      }else{
+        this.user['administrador'] = false;
       }
     })
   }

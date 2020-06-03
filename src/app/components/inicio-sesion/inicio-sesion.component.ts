@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
+import { AlertController } from '@ionic/angular';
+
 @Component({
   selector: 'app-inicio-sesion',
   templateUrl: './inicio-sesion.component.html',
@@ -7,16 +9,18 @@ import * as firebase from 'firebase';
 })
 export class InicioSesionComponent implements OnInit {
     
-  constructor() { }
+  constructor(public alertController: AlertController) { }
   accion = 'iniciar';
 
   ngOnInit() {}
 
   user
-
   correo
   contrasena
   nombre
+  apellido
+  genero
+
   registro(){
     firebase.auth().createUserWithEmailAndPassword(this.correo,this.contrasena).then((usuario)=>{
       console.log(' registro exitoso ', usuario);
@@ -32,14 +36,16 @@ user.updateProfile({
   firebase.database().ref('usuarios/'+user.uid).set({
     nombre: this.nombre,
     correo: this.correo,
-
+    apellido: this.apellido,
+    genero: this.genero,    
   })
 }).catch((error) =>{
-  // An error happened.
+  console.log('actualizacion realizada con exiito =>',error);
 });
 
       
     }).catch((erro)=>{
+      this.alertCuentaDuplicada();
       console.log('ocurrio un error al intentar crear cuenta =>',erro);
       
     })
@@ -62,5 +68,22 @@ user.updateProfile({
     })
   }
 
+  async alertCuentaDuplicada() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Error al crear cuenta',
+      message: '<strong>Ya existe un usuario con las mismas credenciales</strong>!!!',
+      buttons: [
+       {
+          text: 'Ok',
+          handler: () => {
+            console.log('Confirmar Ok');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
 
 }

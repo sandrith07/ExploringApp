@@ -37,12 +37,13 @@ const routes: Routes = [
   {
     path: 'inicio',
     loadChildren: () => import('./pages/inicio/inicio.module').then( m => m.InicioPageModule)
-  },  {
+  },
+  {
     path: 'registrar-eventos',
     loadChildren: () => import('./pages/registrar-eventos/registrar-eventos.module').then( m => m.RegistrarEventosPageModule)
   },
   {
-    path: 'noticia',
+    path: 'noticias/:id',
     loadChildren: () => import('./pages/noticia/noticia.module').then( m => m.NoticiaPageModule)
   },
 
