@@ -3,9 +3,8 @@
   <ion-header [translucent]="true">
     <app-header titulo="temas de interés" tipoHeader="menu"></app-header>
   </ion-header>
-
-  
 </ion-toolbar>
+
 <ion-segment [(ngModel)]="accion" color="primary" >
   <ion-segment-button value="todos" id="titulo" >Todos</ion-segment-button>
   <ion-segment-button value="favoritos" id="titulo" *ngIf="user">Favoritos</ion-segment-button>
@@ -48,12 +47,26 @@
 
 
 <ion-content center *ngIf="accion=='favoritos'">
-
-<ion-card class="welcome-card" [routerLink]="['/tabs/tab3']" >
-  <br>
-  <ion-chip outline color="titulo">
-    <ion-label color="titulo">No hay nada en la lista de Favoritos</ion-label>
-  </ion-chip>
-</ion-card>
-
+    <div *ngIf="negociosFavoritos">
+      <ion-card class=" borde-radio-10 "  *ngFor="let negocio of negociosFiltrados">
+ 
+        <ion-item >
+          <ion-icon name="star" slot="end" color="warning" *ngIf="negociosFavoritos[negocio]?.favorito" (click)="toggleDelete(negocio)"></ion-icon>
+          <ion-icon name="star-outline" slot="end" color="warning" *ngIf="!negociosFavoritos[negocio]?.favorito" (click)="toggleAdd(negocio)"></ion-icon>
+          <ion-card-title  color="dark" id="titulo" class="ion-text-capitalize">{{negociosFavoritos[negocio]?.nombre}}</ion-card-title>      
+        </ion-item>
+       
+        <ion-item >
+          <ion-icon name="map-outline" slot="start" color="secondary"></ion-icon>
+        <ion-card-subtitle>{{negociosFavoritos[negocio]?.direccion}}</ion-card-subtitle>
+        </ion-item>
+                
+        <ion-item >
+          <ion-icon name="trail-sign-outline" slot="start" color="danger"></ion-icon>
+        <ion-card-subtitle>{{negociosFavoritos[negocio]?.tipo}}</ion-card-subtitle>
+        </ion-item>
+      </ion-card>
+  
+    </div>
+    
 </ion-content>

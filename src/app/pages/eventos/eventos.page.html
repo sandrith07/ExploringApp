@@ -1,9 +1,10 @@
 <ion-toolbar>
   <app-header titulo="Eventos anuales" tipoHeader="backtab3"></app-header>
 </ion-toolbar>
-<ion-content fullscreen >
+<ion-toolbar slot="fixed">
   <ion-searchbar animated [(ngModel)]="filtro" (ionChange)="filtrarEventos()"></ion-searchbar>
-
+</ion-toolbar>
+<ion-content fullscreen >
   <div *ngIf="!eventosTiempoReal">
     <ion-card mode="ios" class=" borde-radio-10 ">
       <ion-card-header mode="ios">

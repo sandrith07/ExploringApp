@@ -1,8 +1,11 @@
 <ion-toolbar>
   <app-header titulo="Negocios" tipoHeader="backtab3"></app-header>
 </ion-toolbar>
-<ion-content fullscreen >
+<ion-toolbar slot="fixed">
   <ion-searchbar animated [(ngModel)]="filtro" (ionChange)="filtrarNegocios()"></ion-searchbar>
+</ion-toolbar>
+<ion-content fullscreen >
+ 
 
   <div *ngIf="!negociosTiempoReal">
     <ion-card mode="ios" class=" borde-radio-10 ">
@@ -16,7 +19,8 @@
   <div *ngIf="negociosTiempoReal">
     <ion-card class=" borde-radio-10 " *ngFor="let negocio of negociosFiltrados">
       <ion-item >
-        <ion-icon name="heart-outline" slot="end" color="danger"></ion-icon>
+        <ion-icon name="star" slot="end" color="warning" *ngIf="negociosTiempoReal[negocio]?.favorito" (click)="toggleDelete(negocio)"></ion-icon>
+        <ion-icon name="star-outline" slot="end" color="warning" *ngIf="!negociosTiempoReal[negocio]?.favorito" (click)="toggleAdd(negocio)"></ion-icon>
         <ion-card-title  color="dark" id="titulo" class="ion-text-capitalize">{{negociosTiempoReal[negocio]?.nombre}}</ion-card-title>      
       </ion-item>
      
@@ -26,7 +30,7 @@
       </ion-item>
               
       <ion-item >
-        <ion-icon name="trail-sign-outline" slot="start" color="warning"></ion-icon>
+        <ion-icon name="trail-sign-outline" slot="start" color="danger"></ion-icon>
       <ion-card-subtitle>{{negociosTiempoReal[negocio]?.tipo}}</ion-card-subtitle>
       </ion-item>
     </ion-card>

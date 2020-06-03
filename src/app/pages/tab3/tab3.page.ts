@@ -12,7 +12,10 @@ import * as firebase from 'firebase';
 })
 export class Tab3Page {
    accion = 'todos';
-  visible = false;
+    visible = false;
+    negociosFavoritos;
+    negocios;
+    negociosTiempoReal;
   /*
   tema: Tema = {
     titulo: '',
@@ -25,44 +28,77 @@ export class Tab3Page {
     public popoverController: PopoverController,
     private router: Router,
 
-  ) {}
-
-  toggle() {
-   this.visible = !this.visible;
-   if(this.visible === false){
-    this.showToast('eliminado');
-   }else if(this.visible === true){
-    this.showToast('Añadido');
-   }
+  ) {
+   this.comprobarSesion();
+   this.consultarSitiosFavoritos()
   }
 
-  async  showToast(estado : any){
-    if(estado === 'eliminado'){
-      await this.toastCtrl.create({
-        message: 'Eliminado de favoritos',
-        duration: 900,
-        position: 'middle'
-      }).then(res => res.present());
-    }else{
-      await this.toastCtrl.create({
-        message: 'Añadido a favoritos',
-        duration: 900,
-        position: 'middle'
-      }).then(res => res.present());
+  keys(objeto: Object){
+    return Object.keys((objeto || {})) 
+  }
+
+  consultarSitiosTiempoReal(){
+    console.log('entre a consulta tiempo real');
+
+    firebase.database().ref('negocios').on('value', (datos)=>{
+      console.log('entre a firebase consulta');
+      
+      if(datos.exists()){
+        this.negociosTiempoReal = datos.val()
+        this.negociosFiltrados = Object.keys(this.negociosTiempoReal)
+        console.log('sitios tiempo real -', this.negociosTiempoReal);
+
+      }else{
+        this.negociosTiempoReal = {}
+        this.negociosFiltrados = []
+        console.log('sitios tiempo real vacios');
+        
+      }
+    },(erro)=>{
+      this.negociosTiempoReal = {}
+      console.log('ocurrio el siguiente error al tratar de leer los datos de sitios ', erro);
+      
+    })
+  }
+
+  filtro
+  negociosFiltrados
+  filtrarNegocios(){
+    if(!this.filtro || this.filtro == ""){
+      this.negociosFiltrados = Object.keys(this.negociosFavoritos || {})
+    }else if(this.filtro != ""){
+      this.negociosFiltrados = this.keys(this.negociosFavoritos).filter((negocio) => (this.negociosFavoritos[negocio].nombre).toString().toLowerCase().includes((this.filtro).toString().toLowerCase()))
+
     }
   }
 
-  async presentPopover(evento) {
-    const popover = await this.popoverController.create({
-      component: PopoverComponent,
-      componentProps: {
 
-      },
-      cssClass: 'my-custom-class',
-      event: evento,
-      translucent: true
-    });
-    return await popover.present();
+
+  consultarSitiosFavoritos(){
+    console.log('entre a consulta tiempo real favoritos');
+
+    firebase.database().ref('negocios').on('value', (datos)=>{
+      console.log('entre a firebase consulta favoritos');
+      
+      if(datos.exists()){
+        this.negociosFavoritos = datos.val()
+        console.log(datos.val())
+        
+          this.negociosFiltrados = Object.keys(this.negociosFavoritos)
+          console.log('sitios tiempo real  favoritos-', this.negociosFavoritos);
+
+
+      }else{
+        this.negociosFavoritos = {}
+        this.negociosFavoritos = []
+        console.log('sitios tiempo favoritos real vacios');
+        
+      }
+    },(erro)=>{
+      this.negociosFavoritos = {}
+      console.log('ocurrio el siguiente error al tratar de leer los datos de sitios ', erro);
+      
+    })
   }
   user
   comprobarSesion(){
@@ -102,6 +138,36 @@ export class Tab3Page {
       console.log('ocurrio error en tipo usuario ', erro);
     })
   }
+
+  toggleDelete(negocio) {
+    firebase.database().ref('negocios/'+negocio+ '/favorito').set({
+      favorito: null,
+    })
+    this.showToast('eliminado');
+   }
+
+   toggleAdd(negocio) {
+    firebase.database().ref('negocios/'+negocio+ '/favorito').set({
+      favorito: true,
+    })
+    this.showToast('Añadido');
+   }
+ 
+   async  showToast(estado : any){
+     if(estado === 'eliminado'){
+       await this.toastCtrl.create({
+         message: 'Eliminado de favoritos',
+         duration: 900,
+         position: 'middle'
+       }).then(res => res.present());
+     }else{
+       await this.toastCtrl.create({
+         message: 'Añadido a favoritos',
+         duration: 900,
+         position: 'middle'
+       }).then(res => res.present());
+     }
+   }
 
 }
 

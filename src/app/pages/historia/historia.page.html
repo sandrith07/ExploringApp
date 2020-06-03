@@ -1,9 +1,11 @@
 
   <app-header titulo="Historia" tipoHeader="backtab3"></app-header>
-
+<ion-toolbar slot="fixed">
+  <ion-searchbar animated [(ngModel)]="filtro" (ionChange)="filtrarHistorias()"></ion-searchbar>
+</ion-toolbar>
 
 <ion-content fullscreen >
-  <ion-searchbar animated [(ngModel)]="filtro" (ionChange)="filtrarHistorias()"></ion-searchbar>
+ 
 
   <div *ngIf="!historiasTiempoReal">
     <ion-card mode="ios" class=" borde-radio-10 ">

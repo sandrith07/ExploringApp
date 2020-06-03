@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
 import { Validators } from '@angular/forms';
+import { ToastController} from '@ionic/angular';
+import { NegocioPageModule } from './negocio.module';
 
 @Component({
   selector: 'app-negocio',
@@ -11,9 +13,9 @@ export class NegocioPage implements OnInit {
 
   negocios
   negociosTiempoReal
+  negociosFavoritos
 
-
-  constructor(){
+  constructor(private toastCtrl: ToastController,){
     this.consultarSitiosTiempoReal()
   }
 
@@ -76,5 +78,40 @@ export class NegocioPage implements OnInit {
 
     }
   }
+  
+
+ 
+
+  visible = false;
+  
+  toggleDelete(negocio) {
+    firebase.database().ref('negocios/'+negocio+ '/favorito').set({
+      favorito: null,
+    })
+    this.showToast('eliminado');
+   }
+
+   toggleAdd(negocio) {
+    firebase.database().ref('negocios/'+negocio+ '/favorito').set({
+      favorito: true,
+    })
+    this.showToast('Añadido');
+   }
+ 
+   async  showToast(estado : any){
+     if(estado === 'eliminado'){
+       await this.toastCtrl.create({
+         message: 'Eliminado de favoritos',
+         duration: 900,
+         position: 'middle'
+       }).then(res => res.present());
+     }else{
+       await this.toastCtrl.create({
+         message: 'Añadido a favoritos',
+         duration: 900,
+         position: 'middle'
+       }).then(res => res.present());
+     }
+   }
 
 }

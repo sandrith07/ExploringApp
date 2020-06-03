@@ -1,8 +1,10 @@
 <ion-header [translucent]="true">
   <app-header titulo="Novedades" tipoHeader="menu"></app-header>
 </ion-header>
-<ion-content>
+<ion-toolbar slot="fixed">
   <ion-searchbar animated [(ngModel)]="filtro" (ionChange)="filtrarNoticia()"></ion-searchbar>
+</ion-toolbar>
+<ion-content>
   <ion-card *ngIf="accion =='dejar'" >
     <ion-card-content>
       <ion-item>
