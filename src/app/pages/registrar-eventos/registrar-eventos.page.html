@@ -5,13 +5,12 @@
  <ion-card>
 
   <div class="row center-xs">
-    <ion-card>
-      <ion-card-content class="h-w-160 overflow-none">
+    <ion-card  class="h-w-140  overflow-none " >
+      <ion-card-content class="h-w-130 overflow-none padding-0 ">
         <img [src]= "rutaArchivo" *ngIf="rutaArchivo" class="h-w-130 overflow-none">
         <ion-fab-button size="small" vertical="bottom" horizontal="end" slot="fixed" color="primary" edge (click)="file.click()" > 
           <ion-icon name="image-outline" ></ion-icon>
         </ion-fab-button>
-
         <input hidden #file (change)="seleccionarArchivo(file.files)" type="file" accept="image/*" >
       </ion-card-content>
     </ion-card>
