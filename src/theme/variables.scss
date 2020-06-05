@@ -538,4 +538,19 @@ ion-card {
     min-height: #{$i}px !important;
     max-height: #{$i}px !important;
   }
+
+  //ancho y alto iguales
+  
+  .h-w-#{$i} {
+    height: #{$i}px !important;
+    width: #{$i}px !important;
+
+  }
+
 }
+
+ // desactivar overflow
+
+ .overflow-none {
+  overflow: visible;
+  }

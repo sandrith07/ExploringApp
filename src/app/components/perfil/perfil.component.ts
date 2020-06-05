@@ -14,6 +14,7 @@ export class PerfilComponent implements OnInit {
   ngOnInit() {}
   user
   datosUser
+ 
 
   comprobarSesion(){
     firebase.auth().onAuthStateChanged((user)=>{
@@ -121,5 +122,38 @@ export class PerfilComponent implements OnInit {
     }).catch((error) =>{
       console.log('actualizacion realizada con exiito =>',error);
     });    
-}
+  }
+
+  nombreImagenPerfil = ''
+  imagePath
+  imageURlOriginal
+  nuevaUrl= null
+
+  preview(files) {
+    if (files.length === 0)
+      return;
+ 
+    var mimeType = files[0].type;
+   //if (mimeType.match(/image\/*/) == null) {
+    //  this.message = "Only images are supported.";
+    //  return;
+    //}
+ 
+    var reader = new FileReader();
+    this.imagePath = files;
+    console.log(' datos de archivo original file[0] -> ', files[0]);
+    this.nombreImagenPerfil = files[0].name
+    reader.readAsDataURL(files[0]); 
+    reader.onload = (_event) => { 
+      this.imageURlOriginal= reader.result;
+      //this.modalPerfil(this.imageURlOriginal) 
+      console.log("imagen ", this.imageURlOriginal);
+      this.nuevaUrl= this.imageURlOriginal;
+      console.log("imagen path", this.imagePath);
+    }
+  }
+
+  subirImage(){
+    let taks = firebase.storage().ref('imagenes/perfil' + this.user.uid)
+  }
 }

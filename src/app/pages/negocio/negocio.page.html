@@ -4,9 +4,9 @@
 <ion-toolbar slot="fixed">
   <ion-searchbar animated [(ngModel)]="filtro" (ionChange)="filtrarNegocios()"></ion-searchbar>
 </ion-toolbar>
+
 <ion-content fullscreen >
  
-
   <div *ngIf="!negociosTiempoReal">
     <ion-card mode="ios" class=" borde-radio-10 ">
       <ion-card-header mode="ios">
