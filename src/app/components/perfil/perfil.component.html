@@ -1,13 +1,13 @@
   <div class="row center-xs">
     <ion-card  class="h-w-140  overflow-none borde-radio-50p" >
       <ion-card-content class="h-w-130 overflow-none padding-0 borde-radio-50p">
-        <img  [src]="nuevaUrl"  *ngIf="nuevaUrl"  class="h-w-140  overflow-none borde-radio-50p">
-        <ion-fab vertical="bottom" horizontal="end" slot="fixed" color="secondary" edge  (click)="fileInput.click()" >
+        <img  [src]="rutaArchivo"  *ngIf="rutaArchivo"  class="h-w-140  overflow-none borde-radio-50p">
+        <ion-fab vertical="bottom" horizontal="end" slot="fixed" color="secondary" edge  (click)="file.click()" >
           <ion-fab-button size="small" [disabled]="something">
             <ion-icon name="camera"></ion-icon>
           </ion-fab-button>
         </ion-fab>
-        <input hidden (change)="preview(fileInput.files)" #fileInput type="file"  id="file" accept="image/*"  [disabled]="something">
+        <input hidden (change)="seleccionarArchivo(file.files)" #file type="file"  id="file" accept="image/*"  [disabled]="something">
       </ion-card-content>
     </ion-card>
   </div>

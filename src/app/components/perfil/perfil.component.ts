@@ -127,9 +127,10 @@ export class PerfilComponent implements OnInit {
   nombreImagenPerfil = ''
   imagePath
   imageURlOriginal
-  nuevaUrl= null
+  rutaArchivo= null
+  archivo
 
-  preview(files) {
+  seleccionarArchivo(files) {
     if (files.length === 0)
       return;
  
@@ -148,12 +149,17 @@ export class PerfilComponent implements OnInit {
       this.imageURlOriginal= reader.result;
       //this.modalPerfil(this.imageURlOriginal) 
       console.log("imagen ", this.imageURlOriginal);
-      this.nuevaUrl= this.imageURlOriginal;
+      this.rutaArchivo= this.imageURlOriginal;
       console.log("imagen path", this.imagePath);
     }
   }
 
-  subirImage(){
-    let taks = firebase.storage().ref('imagenes/perfil' + this.user.uid)
+   async subirImage(){
+    let extension = this.archivo[0].type.split('/').slice(-1)[0];
+      console.log('extension ', extension);
+    let taks = firebase.storage().ref('/imagenes/perfil');
+    
   }
+
+  
 }
