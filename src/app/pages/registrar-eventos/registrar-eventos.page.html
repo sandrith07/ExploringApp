@@ -6,11 +6,10 @@
 
   <div class="row center-xs">
     <ion-card>
-      <ion-card-content>
-        <img [src]= "rutaArchivo" *ngIf="rutaArchivo" class="h-w-130 overflow-none borde-radio-50p">
-
-        <ion-fab-button size="small" vertical="bottom" horizontal="end" slot="fixed" color="secondary" edge (click)="file.click()" > 
-
+      <ion-card-content class="h-w-160 overflow-none">
+        <img [src]= "rutaArchivo" *ngIf="rutaArchivo" class="h-w-130 overflow-none">
+        <ion-fab-button size="small" vertical="bottom" horizontal="end" slot="fixed" color="primary" edge (click)="file.click()" > 
+          <ion-icon name="image-outline" ></ion-icon>
         </ion-fab-button>
 
         <input hidden #file (change)="seleccionarArchivo(file.files)" type="file" accept="image/*" >
@@ -53,7 +52,7 @@
     <br>
           <ion-button expand="block" color="secondary" (click)="registrarEventos()" >Guardar</ion-button>
      <br>
- <h1> <ion-text color="secondary">NIvel de carga {{pro}}%</ion-text> </h1>
+ <h4> <ion-text color="primary">Nivel de carga {{pro}}%</ion-text> </h4>
 
   </ion-list>
 
