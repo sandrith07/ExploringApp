@@ -1,31 +1,108 @@
 <ion-card>
+  <ion-toolbar>
+    <ion-buttons slot="secondary">
+      <ion-button  [disabled]="something" (click)="trueclick('updateD')" *ngIf="!something">
+        <ion-icon name="checkmark-outline" slot="end" color="suceso"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="secondary">
+      <ion-button  (click)="trueclick('editD')" >
+        <ion-icon name="color-wand-outline" slot="end" color="primary"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  <ion-title id="titulo">Datos Personales</ion-title>
+  </ion-toolbar>
+  
   <ion-card-header>
     <div class="row margin-0 center-xs">
+      
       <!-- <ion-card class="borde-radio-64 margin-bottom-0" mode="ios"> -->
-      <img src="assets/icon/user.png" class="avatar-80">
+      <ion-img src="assets/icon/user.png" class="avatar-100"></ion-img>
     </div>
     <div class="row margin-0 center-xs">
-      <ion-text>
-        <small>{{user ? user["email"] : ''}}</small>
+      <ion-text color="dark">
+       {{user ? user["email"] : ''}}
       </ion-text>
     </div>
+    <div class="row margin-0 center-xs">
+      <ion-buttons *ngIf="!something">
+        
+        <input  #file type="file" #Image accept="image/jpg"   name="imagen" required hidden>
+        <ion-button  (click)="file.click()" fill="outline" color="primary">Foto
+        <ion-icon name="cloud-upload-outline" slot="end" color="primary"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+        
+    </div>
+
   </ion-card-header>
-  <ion-card-content>
-    
-    
+
+
+  <ion-card-content *ngIf="something">
+
     <ion-list>
       <ion-item >
-        <ion-label position="floating" >Usuario</ion-label>
-        <ion-input type="text" value="{{user.correo}}" disabled></ion-input>
-      </ion-item>
-      
-      <ion-item >
         <ion-label position="floating" >Nombre</ion-label>
-        <ion-input type="text" value="" disabled></ion-input>
+        <ion-input type="text" value="{{datosUser.nombre}}"  [disabled]="something" ></ion-input>
       </ion-item>
-      <br>
-        <ion-button expand="block" color="secondary" >Actualizar datos</ion-button>
-      <br>
+      <ion-item >
+        <ion-label position="floating" >Apellido</ion-label>
+        <ion-input type="text" value="{{datosUser.apellido}}"  [disabled]="something" ></ion-input>
+      </ion-item>
+      <ion-item >
+        <ion-label position="floating" >Género</ion-label>
+        <ion-input type="text" disabled value="{{datosUser.genero}}" ></ion-input>
+      </ion-item>
+
+     
+    </ion-list>
+
+  </ion-card-content>
+  <ion-card-content *ngIf="!something">
+
+    <ion-list>
+      <ion-item >
+        <ion-label position="floating" [(ngModel)]="nombre" >Nombre</ion-label>
+        <ion-input type="text" ></ion-input>
+      </ion-item>
+      <ion-item >
+        <ion-label position="floating" >Apellido</ion-label>
+        <ion-input type="text" [(ngModel)]="apellido" ></ion-input>
+      </ion-item>
+      <ion-item >
+        <ion-label position="floating" >Género</ion-label>
+        <ion-input type="text" disabled value="{{datosUser.genero}}" ></ion-input>
+      </ion-item>
+
+     
+    </ion-list>
+
+  </ion-card-content>
+ </ion-card>
+
+ <ion-card>
+  <ion-toolbar>
+    <ion-buttons slot="secondary">
+      <ion-button  [disabled]="somethingP" (click)="trueclick('updateP')" *ngIf="!somethingP">
+        <ion-icon name="checkmark-outline" slot="end" color="suceso"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="secondary">
+      <ion-button (click)="trueclick('editP')" >
+        <ion-icon name="color-wand-outline" slot="end" color="primary"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  <ion-title id="titulo">Seguridad</ion-title>
+  </ion-toolbar>
+
+  <ion-card-content>
+
+    <ion-list>
+      <ion-item >
+        <ion-label position="floating" >Contraseña</ion-label>
+        <ion-input type="password" value="{{datosUser.correo}}" [disabled]="somethingP"></ion-input>
+      </ion-item>
+       
     </ion-list>
 
   </ion-card-content>

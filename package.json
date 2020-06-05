@@ -27,7 +27,6 @@
     "@ionic/angular": "^5.0.0",
     "@ionic/storage": "^2.2.0",
     "angularfire2": "^5.4.2",
-    "cordova-sqlite-storage": "^5.0.0",
     "firebase": "^7.14.5",
     "flexboxgrid-sass": "^8.0.5",
     "mapbox-gl": "^1.10.0",
@@ -62,8 +61,6 @@
   },
   "description": "An Ionic project",
   "cordova": {
-    "plugins": {
-      "cordova-sqlite-storage": {}
-    }
+    "plugins": {}
   }
 }

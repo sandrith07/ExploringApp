@@ -5,22 +5,23 @@
         <img src="assets/icon/user.png" alt="" class="user-avatar">
       </div>
       <ion-segment [(ngModel)]="accion" color="secondary">
-        <ion-segment-button value="iniciar" id="titulo" >Iniciar</ion-segment-button>
-        <ion-segment-button value="registrar" id="titulo">Registrar</ion-segment-button>
+        <ion-segment-button value="iniciar" id="titulo" (click)="limpiarForm()">Iniciar</ion-segment-button>
+        <ion-segment-button value="registrar" id="titulo" (click)="limpiarForm()">Registrar</ion-segment-button>
       </ion-segment>
 
      
     
     <div *ngIf="accion =='iniciar'" class="ion-padding">
-        <ion-list>
+
+         <ion-list>
           <ion-item >
-            <ion-label position="floating" >Usuario</ion-label>
-            <ion-input type="text" [(ngModel)]="correo"></ion-input>
+            <ion-label position="floating" >Usuario@example.com</ion-label>
+            <ion-input type="email" [(ngModel)]="correo" required></ion-input>
           </ion-item>
           
           <ion-item >
             <ion-label position="floating" >Contraseña</ion-label>
-            <ion-input type="password" [(ngModel)]="contrasena"></ion-input>
+            <ion-input type="password" [(ngModel)]="contrasena" required></ion-input>
           </ion-item>
           
         </ion-list>
@@ -46,20 +47,20 @@
         <ion-list>
           <ion-item >
             <ion-label position="floating" >Usuario</ion-label>
-            <ion-input type="text" [(ngModel)]="correo"></ion-input>
+            <ion-input type="text" [(ngModel)]="correo" required></ion-input>
           </ion-item>
           <ion-item >
            <ion-label position="floating">Nombre</ion-label>
-           <ion-input type="text" [(ngModel)]="nombre"></ion-input>
+           <ion-input type="text" [(ngModel)]="nombre" required></ion-input>
          </ion-item>
          <ion-item >
           <ion-label position="floating">Apellido</ion-label>
-          <ion-input type="text" [(ngModel)]="apellido"></ion-input>
+          <ion-input type="text" [(ngModel)]="apellido" required></ion-input>
         </ion-item>
 
          <ion-item>
           <ion-label>Género</ion-label>
-          <ion-select [(ngModel)]="genero" okText="Ok" cancelText="Cancelar">
+          <ion-select [(ngModel)]="genero" okText="Ok" cancelText="Cancelar" required>
             <ion-select-option value="Femenino">Femenino</ion-select-option>
             <ion-select-option value="Masculino">Masculino</ion-select-option>
             <ion-select-option value="Otro">Otro</ion-select-option>
@@ -68,7 +69,7 @@
           
           <ion-item >
             <ion-label position="floating" >Contraseña</ion-label>
-            <ion-input type="password"  [(ngModel)]="contrasena"></ion-input>
+            <ion-input type="password"  [(ngModel)]="contrasena" required></ion-input>
           </ion-item>
           
         </ion-list>

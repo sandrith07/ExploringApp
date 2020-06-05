@@ -3,6 +3,7 @@ import * as firebase from 'firebase';
 import { Validators } from '@angular/forms';
 import { ToastController} from '@ionic/angular';
 import { NegocioPageModule } from './negocio.module';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-negocio',
@@ -15,7 +16,7 @@ export class NegocioPage implements OnInit {
   negociosTiempoReal
   negociosFavoritos
 
-  constructor(private toastCtrl: ToastController,){
+  constructor(private toastCtrl: ToastController,public alertController: AlertController){
     this.comprobarSesion(),
     this.consultarSitiosTiempoReal()
   }
@@ -137,6 +138,7 @@ export class NegocioPage implements OnInit {
   }
 
    toggleAdd(negociod, negocio) {
+   if(this.user){
     console.log('Id del negocio', negocio)
     console.log('datos del negocio', negociod);
     firebase.database().ref('usuarios/'+this.user.uid+ '/favorito/').push({
@@ -146,7 +148,30 @@ export class NegocioPage implements OnInit {
 
     })
     this.showToast('Añadido');
+   }else{
+    
+    this.alertNoFavoritos();
+
    }
+   }
+
+   async alertNoFavoritos() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'No puede añadir favoritos',
+      message: '<stron>Para acceder a esta funcionalidad, debes Iniciar Sesión o Registrarte</stron>',
+      buttons: [
+       {
+          text: 'Ok',
+          handler: () => {
+            console.log('Confirmar Ok');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
  
    async  showToast(estado : any){
      if(estado === 'eliminado'){
