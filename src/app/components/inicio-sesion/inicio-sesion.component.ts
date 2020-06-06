@@ -32,12 +32,12 @@ export class InicioSesionComponent implements OnInit {
         
         let user = firebase.auth().currentUser;
   
-  user.updateProfile({
-    displayName: this.nombre,
+        user.updateProfile({
+        displayName: this.nombre,
     // photoURL: "https://example.com/jane-q-user/profile.jpg"
-  }).then(() =>{
+    
+    }).then(() =>{
     // Update successful.
-  
     firebase.database().ref('usuarios/'+user.uid).set({
       nombre: this.nombre,
       correo: this.correo,

@@ -546,7 +546,6 @@ ion-card {
     width: #{$i}px !important;
 
   }
-
 }
 
  // desactivar overflow
@@ -554,3 +553,10 @@ ion-card {
  .overflow-none {
   overflow: visible;
   }
+
+    //ancho estatico y alto dinamico
+    .w-h-160 {
+      height: 140px !important;
+      width: 100% !important;
+  
+    }

@@ -37,6 +37,7 @@ export class RegistrarEventosPage implements OnInit {
 
   nombre
   descripcion
+  lugar
   direccion
   fechainicio
   fechafin
@@ -51,6 +52,7 @@ export class RegistrarEventosPage implements OnInit {
     "nombre": this.nombre,
     "descripcion": this.descripcion,
     "direccion": this.direccion,
+    "lugar": this.lugar,
     "fechainicio": this.fechainicio,
     "fechafin": this.fechafin,
     }).then(async ()=>{

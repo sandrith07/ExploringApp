@@ -1,13 +1,14 @@
   <div class="row center-xs">
     <ion-card  class="h-w-140  overflow-none borde-radio-50p" >
-      <ion-card-content class="h-w-130 overflow-none padding-0 borde-radio-50p">
+      <ion-card-content class="h-w-150 overflow-none padding-0 borde-radio-50p">
+        <input hidden #file (change)="seleccionarArchivo(file.files)" type="file" name="file"accept="image/*" required >
         <img  [src]="rutaArchivo"  *ngIf="rutaArchivo"  class="h-w-140  overflow-none borde-radio-50p">
-        <ion-fab vertical="bottom" horizontal="end" slot="fixed" color="secondary" edge  (click)="file.click()" >
-          <ion-fab-button size="small" [disabled]="something">
+        <img  [src]="datosUser.urlImagen"  *ngIf="datosUser.urlImagen"  class="h-w-140  overflow-none borde-radio-50p">
+        <ion-fab vertical="bottom" horizontal="end" slot="fixed" color="secondary">
+          <ion-fab-button size="small" [disabled]="something" edge (click)="file.click()">
             <ion-icon name="camera"></ion-icon>
           </ion-fab-button>
         </ion-fab>
-        <input hidden (change)="seleccionarArchivo(file.files)" #file type="file"  id="file" accept="image/*"  [disabled]="something">
       </ion-card-content>
     </ion-card>
   </div>
@@ -15,7 +16,7 @@
   <ion-card>
   <ion-toolbar>
     <ion-buttons slot="secondary">
-      <ion-button  [disabled]="something" (click)="trueclick('updateD')" *ngIf="!something">
+      <ion-button  [disabled]="something" (click)="trueclick('updateD')" (click)="setDatosPersona()" *ngIf="!something">
         <ion-icon name="checkmark-outline" slot="end" color="suceso"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -26,40 +27,24 @@
     </ion-buttons>
   <ion-title id="titulo">Datos Personales</ion-title>
   </ion-toolbar>
-  <ion-card-content *ngIf="something">
+  <ion-card-content>
 
-    <ion-list>
+    <ion-list *ngIf="datosUser">
       <ion-item >
         <ion-label position="floating" >Nombre</ion-label>
-        <ion-input type="text" value="{{datosUser?.nombre}}"  [disabled]="something" ></ion-input>
+        <ion-input type="text"  [(ngModel)]="datosUser.nombre" [disabled]="something" ></ion-input>
       </ion-item>
       <ion-item >
         <ion-label position="floating" >Apellido</ion-label>
-        <ion-input type="text" value="{{datosUser?.apellido}}"  [disabled]="something" ></ion-input>
+        <ion-input type="text"  [(ngModel)]="datosUser.apellido"  [disabled]="something" ></ion-input>
+      </ion-item>
+      <ion-item >
+        <ion-label position="floating" >Email</ion-label>
+        <ion-input type="text" disabled value="{{datosUser?.correo}}" ></ion-input>
       </ion-item>
       <ion-item >
         <ion-label position="floating" >Género</ion-label>
         <ion-input type="text" disabled value="{{datosUser?.genero}}" ></ion-input>
-      </ion-item>
-
-     
-    </ion-list>
-
-  </ion-card-content>
-  <ion-card-content *ngIf="!something">
-
-    <ion-list>
-      <ion-item >
-        <ion-label position="floating" [(ngModel)]="nombre" >Nombre</ion-label>
-        <ion-input type="text" ></ion-input>
-      </ion-item>
-      <ion-item >
-        <ion-label position="floating" >Apellido</ion-label>
-        <ion-input type="text" [(ngModel)]="apellido" ></ion-input>
-      </ion-item>
-      <ion-item >
-        <ion-label position="floating" >Género</ion-label>
-        <ion-input type="text" disabled value="{{datosUser.genero}}" ></ion-input>
       </ion-item>
 
      

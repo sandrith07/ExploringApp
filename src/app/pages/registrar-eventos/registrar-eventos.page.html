@@ -6,13 +6,15 @@
  <form (ngSubmit)="form.form.valid? registrarEventos(): alertcompletar()" #form="ngForm">
  <ion-card>
   <div class="row center-xs">
-    <ion-card  class="h-w-140  overflow-none " >
-      <ion-card-content class="h-w-130 overflow-none padding-0 ">
-        <img [src]= "rutaArchivo" *ngIf="rutaArchivo" class="h-w-130 overflow-none">
-        <ion-fab-button size="small" vertical="bottom" horizontal="end" slot="fixed" color="primary" edge (click)="file.click()" > 
-          <ion-icon name="image-outline" ></ion-icon>
-        </ion-fab-button>
+    <ion-card  class="w-h-160  overflow-none " >
+      <ion-card-content class="w-h-160 overflow-none padding-0 ">
+        <img [src]= "rutaArchivo" *ngIf="rutaArchivo" >
         <input hidden #file (change)="seleccionarArchivo(file.files)" type="file" name="file"accept="image/*" required >
+        <ion-fab vertical="center" horizontal="center" slot="fixed" >
+          <ion-fab-button size="small" edge (click)="file.click()"> 
+            <ion-icon name="image-outline" ></ion-icon>
+          </ion-fab-button>
+        </ion-fab>
       </ion-card-content>
     </ion-card>
   </div>
@@ -29,7 +31,7 @@
 
     <ion-item>
       <ion-label>Municipio</ion-label>
-      <ion-select value="Municipios" okText="Ok" cancelText="Cancelar" name="municipio" required>
+      <ion-select value="Municipios" okText="Ok" cancelText="Cancelar" name="municipio"  [(ngModel)]="lugar"  required>
         <ion-select-option value="Aguachica">Aguachica</ion-select-option>
         <ion-select-option value="Agustín Codazzi">Agustín Codazzi</ion-select-option>
         <ion-select-option value="Bosconia">Bosconia</ion-select-option>
@@ -54,6 +56,7 @@
         <ion-select-option value="San Diego">San Diego</ion-select-option>
         <ion-select-option value="La Gloria">La Gloria</ion-select-option>
         <ion-select-option value="González">González</ion-select-option>
+        <ion-select-option value="Valledupar">Valledupar</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item >
@@ -72,7 +75,7 @@
     <br>
           <ion-button expand="block" type="submit" color="secondary" >Guardar</ion-button>
      <br>
- <h4> <ion-text color="primary">Nivel de carga {{pro}}%</ion-text> </h4>
+
 
   </ion-list>
 

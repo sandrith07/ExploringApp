@@ -103,63 +103,98 @@ export class PerfilComponent implements OnInit {
   nombre
   apellido
 
-  setDatosPersona(){
-     
+  setDatosPersona(){    
     let user = firebase.auth().currentUser;
-    let display;
-    console.log("set datos", user.displayName);
+    this.subirArchivo();
+    firebase.database().ref('usuarios/'+this.user.uid).set({
+      nombre: this.datosUser.nombre,
+      correo: this.datosUser.correo,
+      apellido: this.datosUser.apellido,
+      genero: this.datosUser.genero,    
+      urlImagen : this.datosUser.urlImagen,
+    })
+    this. setDatosAuth();
+    console.log("datos persona", this.datosUser);
+  }
+
+  setDatosAuth(){
+    let user = firebase.auth().currentUser;
     user.updateProfile({
-      displayName: this.nombre,
-      // photoURL: "https://example.com/jane-q-user/profile.jpg"
-    }).then(() =>{
-      // Update successful.
-    
-      firebase.database().ref('usuarios/'+user.uid).set({
-        nombre: this.nombre,
-        apellido: this.apellido,
- 
-      })
-    }).catch((error) =>{
-      console.log('actualizacion realizada con exiito =>',error);
-    });    
+      displayName: this.datosUser.nombre,
+      photoURL:  this.datosUser.urlImagen,
+    })
   }
 
-  nombreImagenPerfil = ''
-  imagePath
-  imageURlOriginal
-  rutaArchivo= null
+  imagenlocal: string = "./assets/add-image.jpeg";
+  imagenSubida: File = null;
+
+
+
   archivo
+  nombreArchivo
+  rutaArchivo
+  
+  seleccionarArchivo(files){
+    if(files.length === 0) // si no selecciona nada 
+      return
+    
+      let reader = new FileReader();
+      this.archivo = files
+      this.nombreArchivo = files[0].name
 
-  seleccionarArchivo(files) {
-    if (files.length === 0)
-      return;
- 
-    var mimeType = files[0].type;
-   //if (mimeType.match(/image\/*/) == null) {
-    //  this.message = "Only images are supported.";
-    //  return;
-    //}
- 
-    var reader = new FileReader();
-    this.imagePath = files;
-    console.log(' datos de archivo original file[0] -> ', files[0]);
-    this.nombreImagenPerfil = files[0].name
-    reader.readAsDataURL(files[0]); 
-    reader.onload = (_event) => { 
-      this.imageURlOriginal= reader.result;
-      //this.modalPerfil(this.imageURlOriginal) 
-      console.log("imagen ", this.imageURlOriginal);
-      this.rutaArchivo= this.imageURlOriginal;
-      console.log("imagen path", this.imagePath);
-    }
+      reader.readAsDataURL(files[0]);
+
+      reader.onload = ()=>{
+        this.rutaArchivo = reader.result
+        console.log(' ruta archivo => ',this.rutaArchivo);
+        console.log('archivo ->' , this.archivo);
+        //this.subirArchivo()
+      }
+
+
   }
 
-   async subirImage(){
+  //fin seleccionar archivo -------------------------------------
+
+  urlDescargaArchivo
+
+  async subirArchivo(){
+    
     let extension = this.archivo[0].type.split('/').slice(-1)[0];
       console.log('extension ', extension);
-    let taks = firebase.storage().ref('/imagenes/perfil');
-    
-  }
 
-  
+    let tareaSubirArchivo =  firebase.storage().ref('/imagenes/usuarios/'+this.user.uid+'/perfil.'+extension).putString(this.rutaArchivo, 'data_url');
+
+    await tareaSubirArchivo.on('state_changed',(progreso)=>{
+      // codigo a utilizar con la carga
+      
+ 
+    },(erro)=>{
+      console.log('ocurrio un error al cargar e larchivo ', this.nombreArchivo);
+      console.log('detalle error ', erro);
+    },()=>{
+      // obtener la url del archivo subido
+     // this.urlDescargaArchivo = tareaSubirArchivo.snapshot.downloadURL
+
+      tareaSubirArchivo.snapshot.ref.getDownloadURL().then((downloadURL) =>{
+       this.urlDescargaArchivo = downloadURL
+
+        //console.log('File available at', downloadURL);
+      console.log('ruta urll imagne ', this.urlDescargaArchivo );
+
+        /**
+         * 4.1 actualizar evento en la base de datos ... atributo ruta imagen
+         * 4.2 actualizar evento en la base de datos con otro metodo... escritura en multiples rutas
+         * 
+         */
+
+         //4.1 inicio ----------------------
+
+         firebase.database().ref('usuarios/'+this.user.uid+'/urlImagen').set(this.urlDescargaArchivo)
+
+      });
+
+    })
+
+  }
 }
