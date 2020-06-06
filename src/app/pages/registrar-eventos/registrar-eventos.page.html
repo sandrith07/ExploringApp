@@ -12,12 +12,7 @@
         <ion-fab-button size="small" vertical="bottom" horizontal="end" slot="fixed" color="primary" edge (click)="file.click()" > 
           <ion-icon name="image-outline" ></ion-icon>
         </ion-fab-button>
-<<<<<<< Updated upstream
-        <input hidden #file (change)="seleccionarArchivo(file.files)" type="file" accept="image/*" >
-=======
-
         <input hidden #file (change)="seleccionarArchivo(file.files)" type="file" name="file"accept="image/*" required >
->>>>>>> Stashed changes
       </ion-card-content>
     </ion-card>
   </div>
