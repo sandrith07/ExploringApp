@@ -14,6 +14,8 @@ import { IonicStorageModule } from '@ionic/storage';
 import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [AppComponent,PopoverComponent],
@@ -25,7 +27,9 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
     ComponentsModule,
     IonicStorageModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    FormsModule
+
   ],
   providers: [
     StatusBar,
