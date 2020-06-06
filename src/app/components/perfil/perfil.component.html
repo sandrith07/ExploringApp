@@ -1,4 +1,18 @@
-<ion-card>
+  <div class="row center-xs">
+    <ion-card  class="h-w-140  overflow-none borde-radio-50p" >
+      <ion-card-content class="h-w-130 overflow-none padding-0 borde-radio-50p">
+        <img  [src]="rutaArchivo"  *ngIf="rutaArchivo"  class="h-w-140  overflow-none borde-radio-50p">
+        <ion-fab vertical="bottom" horizontal="end" slot="fixed" color="secondary" edge  (click)="file.click()" >
+          <ion-fab-button size="small" [disabled]="something">
+            <ion-icon name="camera"></ion-icon>
+          </ion-fab-button>
+        </ion-fab>
+        <input hidden (change)="seleccionarArchivo(file.files)" #file type="file"  id="file" accept="image/*"  [disabled]="something">
+      </ion-card-content>
+    </ion-card>
+  </div>
+ 
+  <ion-card>
   <ion-toolbar>
     <ion-buttons slot="secondary">
       <ion-button  [disabled]="something" (click)="trueclick('updateD')" *ngIf="!something">
@@ -12,46 +26,20 @@
     </ion-buttons>
   <ion-title id="titulo">Datos Personales</ion-title>
   </ion-toolbar>
-  
-  <ion-card-header>
-    <div class="row margin-0 center-xs">
-      
-      <!-- <ion-card class="borde-radio-64 margin-bottom-0" mode="ios"> -->
-      <ion-img src="assets/icon/user.png" class="avatar-100"></ion-img>
-    </div>
-    <div class="row margin-0 center-xs">
-      <ion-text color="dark">
-       {{user ? user["email"] : ''}}
-      </ion-text>
-    </div>
-    <div class="row margin-0 center-xs">
-      <ion-buttons *ngIf="!something">
-        
-        <input  #file type="file" #Image accept="image/jpg"   name="imagen" required hidden>
-        <ion-button  (click)="file.click()" fill="outline" color="primary">Foto
-        <ion-icon name="cloud-upload-outline" slot="end" color="primary"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-        
-    </div>
-
-  </ion-card-header>
-
-
   <ion-card-content *ngIf="something">
 
     <ion-list>
       <ion-item >
         <ion-label position="floating" >Nombre</ion-label>
-        <ion-input type="text" value="{{datosUser.nombre}}"  [disabled]="something" ></ion-input>
+        <ion-input type="text" value="{{datosUser?.nombre}}"  [disabled]="something" ></ion-input>
       </ion-item>
       <ion-item >
         <ion-label position="floating" >Apellido</ion-label>
-        <ion-input type="text" value="{{datosUser.apellido}}"  [disabled]="something" ></ion-input>
+        <ion-input type="text" value="{{datosUser?.apellido}}"  [disabled]="something" ></ion-input>
       </ion-item>
       <ion-item >
         <ion-label position="floating" >Género</ion-label>
-        <ion-input type="text" disabled value="{{datosUser.genero}}" ></ion-input>
+        <ion-input type="text" disabled value="{{datosUser?.genero}}" ></ion-input>
       </ion-item>
 
      
@@ -100,7 +88,7 @@
     <ion-list>
       <ion-item >
         <ion-label position="floating" >Contraseña</ion-label>
-        <ion-input type="password" value="{{datosUser.correo}}" [disabled]="somethingP"></ion-input>
+        <ion-input type="password" value="{{datosUser?.correo}}" [disabled]="somethingP"></ion-input>
       </ion-item>
        
     </ion-list>
