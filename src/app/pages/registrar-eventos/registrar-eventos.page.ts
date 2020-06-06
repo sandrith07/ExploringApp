@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
-import { Validators } from '@angular/forms';
+import { Validators, FormBuilder } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 
 @Component({
@@ -10,14 +10,14 @@ import { AlertController } from '@ionic/angular';
 })
 export class RegistrarEventosPage implements OnInit {
 
-  constructor(public alertController: AlertController) { 
+  constructor(public alertController: AlertController) {
     this.comprobarSesion()
   }
+
 
   ngOnInit() {
   }
 
-    
   user
   comprobarSesion(){
     firebase.auth().onAuthStateChanged((user)=>{
@@ -36,12 +36,12 @@ export class RegistrarEventosPage implements OnInit {
   }
 
   nombre
-
   descripcion
   direccion
   fechainicio
   fechafin
   keyEvento
+
   registrarEventos(){
     
     let rutaEvento = firebase.database().ref('/eventos') // ruta, tener en cuenta para consultas en tiempo real
@@ -61,13 +61,41 @@ export class RegistrarEventosPage implements OnInit {
       console.log('ocurrio un error al intentar crear un evento =>',error);
       this.alertEventoNoGuardado()
     });
+    this.alertEventoGuardado()
+  }
+
+  limpiar(){
+    this.nombre = null;
+    this.descripcion = null;
+    this.direccion = null;
+    this.fechainicio =null;
+    this.fechafin = null;
+    this.rutaArchivo = null;
   }
 
   async alertEventoGuardado() {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
-      header: 'Evento Guardado con Exito',
-      message: '<strong>Ha ocurrido un error al intentar publicar el evento, por favor intente más tarde</strong>!!!',
+      header: 'Evento Guardado',
+      message: '<strong>El evento ha sido guardado exitosamente</strong>!!!',
+      buttons: [
+       {
+          text: 'Ok',
+          handler: () => {
+            console.log('Confirmar Ok');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  async alertcompletar() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'campos vacios',
+      message: 'Todos los campos deben estar diligenciados',
       buttons: [
        {
           text: 'Ok',
@@ -101,17 +129,6 @@ export class RegistrarEventosPage implements OnInit {
 
   imagenlocal: string = "./assets/add-image.jpeg";
   imagenSubida: File = null;
-
-  entradaDeArchivo(file: FileList) {
-    this.imagenSubida = file.item(0);
-
-    // vista de imagen previa
-    let reader = new FileReader();
-    reader.onload = (event: any) => {
-      this.imagenlocal = event.target.result;
-    };
-    reader.readAsDataURL(this.imagenSubida);
-  }
 
 
   archivo
@@ -181,6 +198,7 @@ export class RegistrarEventosPage implements OnInit {
          //4.1 inicio ----------------------
 
          firebase.database().ref('eventos/'+this.keyEvento+'/urlImagen').set(this.urlDescargaArchivo)
+         this.limpiar()
 
          //4.2 actualizar varias rutas a la vez 
          /* let updates = {}
@@ -195,26 +213,17 @@ export class RegistrarEventosPage implements OnInit {
 
          firebase.database().ref().update(updates).then(()=>{
            console.log("datos actualizados correctamente");
-           
+
          }).catch((erro)=>{
            console.log('error al actualizar todas las tablas');
-           
+
          })*/
 
       });
-      
+
     })
 
-
-    
-
-    
   }
-
   pro
-
-
-
-
 
 }

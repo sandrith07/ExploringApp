@@ -2,8 +2,9 @@
 
 
 <ion-content padding="true" >
- <ion-card>
 
+ <form (ngSubmit)="form.form.valid? registrarEventos(): alertcompletar()" #form="ngForm">
+ <ion-card>
   <div class="row center-xs">
     <ion-card  class="h-w-140  overflow-none " >
       <ion-card-content class="h-w-130 overflow-none padding-0 ">
@@ -11,7 +12,12 @@
         <ion-fab-button size="small" vertical="bottom" horizontal="end" slot="fixed" color="primary" edge (click)="file.click()" > 
           <ion-icon name="image-outline" ></ion-icon>
         </ion-fab-button>
+<<<<<<< Updated upstream
         <input hidden #file (change)="seleccionarArchivo(file.files)" type="file" accept="image/*" >
+=======
+
+        <input hidden #file (change)="seleccionarArchivo(file.files)" type="file" name="file"accept="image/*" required >
+>>>>>>> Stashed changes
       </ion-card-content>
     </ion-card>
   </div>
@@ -19,43 +25,62 @@
   <ion-list>
     <ion-item >
       <ion-label position="floating" >Nombre</ion-label>
-      <ion-input type="text" [(ngModel)]="nombre"></ion-input>
+      <ion-input type="text" [(ngModel)]="nombre" name="nombre" required></ion-input>
     </ion-item>
     <ion-item >
       <ion-label position="floating"  >Descripción</ion-label>
-      <ion-input type="text" [(ngModel)]="descripcion"></ion-input>
+      <ion-input type="text" [(ngModel)]="descripcion" name="descripcion" required></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label>Municipio</ion-label>
-      <ion-select value="Municipios" okText="Okay" cancelText="Dismiss">
-        <ion-select-option value="brown">Brown</ion-select-option>
-        <ion-select-option value="blonde">Blonde</ion-select-option>
-        <ion-select-option value="black">Black</ion-select-option>
-        <ion-select-option value="red">Red</ion-select-option>
+      <ion-select value="Municipios" okText="Ok" cancelText="Cancelar" name="municipio" required>
+        <ion-select-option value="Aguachica">Aguachica</ion-select-option>
+        <ion-select-option value="Agustín Codazzi">Agustín Codazzi</ion-select-option>
+        <ion-select-option value="Bosconia">Bosconia</ion-select-option>
+        <ion-select-option value="Chimichagua">Chimichagua</ion-select-option>
+        <ion-select-option value="El Copey">El Copey</ion-select-option>
+        <ion-select-option value="San Alberto">San Alberto</ion-select-option>
+        <ion-select-option value="Curumaní">Curumaní</ion-select-option>
+        <ion-select-option value="El Paso">El Paso</ion-select-option>
+        <ion-select-option value="La Paz">La Paz</ion-select-option>
+        <ion-select-option value="Pueblo Bello">Pueblo Bello</ion-select-option>
+        <ion-select-option value="	La Jagua de Ibirico">	La Jagua de Ibirico</ion-select-option>
+        <ion-select-option value="Chiriguaná">Chiriguaná</ion-select-option>
+        <ion-select-option value="Astrea">Astrea</ion-select-option>
+        <ion-select-option value="San Martín">San Martín</ion-select-option>
+        <ion-select-option value="Pelaya">Pelaya</ion-select-option>
+        <ion-select-option value="Pailitas">Pailitas</ion-select-option>
+        <ion-select-option value="Gamarra">Gamarra</ion-select-option>
+        <ion-select-option value="Manaure Balcón del Cesar">Manaure Balcón del Cesar</ion-select-option>
+        <ion-select-option value="Río de Oro">Río de Oro</ion-select-option>
+        <ion-select-option value="Tamalameque">Tamalameque</ion-select-option>
+        <ion-select-option value="Becerril">Becerril</ion-select-option>
+        <ion-select-option value="San Diego">San Diego</ion-select-option>
+        <ion-select-option value="La Gloria">La Gloria</ion-select-option>
+        <ion-select-option value="González">González</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item >
       <ion-label position="floating"  >Dirección</ion-label>
-      <ion-input type="text" [(ngModel)]="direccion"></ion-input>
+      <ion-input type="text" [(ngModel)]="direccion" name="direccion" required></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label>Fecha de inicio</ion-label>
-      <ion-datetime value="2020-02-21" placeholder="Seleccionar fecha"  [(ngModel)]="fechainicio"></ion-datetime>
+      <ion-datetime value="2020-02-21" placeholder="Seleccionar fecha"  [(ngModel)]="fechainicio" name="fechainicio" required></ion-datetime>
     </ion-item>
     <ion-item>
       <ion-label>Fecha Fin</ion-label>
-      <ion-datetime value="2020-02-21" placeholder="Seleccionar fecha" [(ngModel)]="fechafin"></ion-datetime>
+      <ion-datetime value="2020-02-21" placeholder="Seleccionar fecha" [(ngModel)]="fechafin" name="fechafin" required></ion-datetime>
     </ion-item>
     <br>
-          <ion-button expand="block" color="secondary" (click)="registrarEventos()" >Guardar</ion-button>
+          <ion-button expand="block" type="submit" color="secondary" >Guardar</ion-button>
      <br>
  <h4> <ion-text color="primary">Nivel de carga {{pro}}%</ion-text> </h4>
 
   </ion-list>
 
  </ion-card>
-
- 
+</form>
 </ion-content>
