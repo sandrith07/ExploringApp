@@ -6,9 +6,9 @@
         
       <div class="row margin-0 center-xs">
    
-        <img [src]="user['photoURL']" class="h-w-70  overflow-none borde-radio-50p avatar-70 padding-5">
         
-          
+        <img  [src]="datosUser?.urlImagen"  *ngIf="datosUser?.urlImagen"  class="h-w-70  overflow-none borde-radio-50p avatar-70 padding-5">
+        <img src="https://cdn.pixabay.com/photo/2016/11/18/23/38/child-1837375_960_720.png" *ngIf="!datosUser?.urlImagen" class="h-w-70  overflow-none borde-radio-50p avatar-70 padding-5">
         <!-- </ion-card> -->
         <!-- <ion-avatar>
             <img src="https://cdn.pixabay.com/photo/2016/11/18/23/38/child-1837375_960_720.png">
@@ -17,8 +17,6 @@
     <div class="row margin-0 center-xs">
       <ion-text>
         <small>{{user ? user["email"] : ''}}</small>
-        
-
       </ion-text>
     </div>
 

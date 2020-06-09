@@ -1,10 +1,11 @@
 <app-header titulo="Inicio" tipoHeader="menu"></app-header>
 <ion-content>
   <div *ngIf="user">
+
     <app-perfil></app-perfil>
+   
   </div>
   <div *ngIf="!user">
     <app-inicio-sesion></app-inicio-sesion>
   </div>
-  
 </ion-content>

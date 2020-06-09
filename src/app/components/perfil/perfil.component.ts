@@ -101,7 +101,7 @@ export class PerfilComponent implements OnInit {
   }
 
   nombre
-  apellido
+  telefono
 
   setDatosPersona(){    
     let user = firebase.auth().currentUser;
@@ -109,7 +109,7 @@ export class PerfilComponent implements OnInit {
     firebase.database().ref('usuarios/'+this.user.uid).set({
       nombre: this.datosUser.nombre,
       correo: this.datosUser.correo,
-      apellido: this.datosUser.apellido,
+      telefono: this.datosUser.telefono,
       genero: this.datosUser.genero,    
       urlImagen : this.datosUser.urlImagen,
     })

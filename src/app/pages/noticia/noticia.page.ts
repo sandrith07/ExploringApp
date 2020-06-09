@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import * as firebase from 'firebase';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-noticia',
@@ -9,7 +10,7 @@ import * as firebase from 'firebase';
 })
 export class NoticiaPage implements OnInit {
 
-  constructor(private route: ActivatedRoute ) {
+  constructor(private route: ActivatedRoute, public alertController: AlertController ) {
     this.comprobarSesion()
    }
   tipo="detalleT"
@@ -62,6 +63,184 @@ export class NoticiaPage implements OnInit {
     }).catch((erro)=>{
       console.log('ocurrio error en tipo usuario ', erro);
     })
+  }
+
+  nombre
+  descripcion
+  lugar
+  direccion
+  fechainicio
+  fechafin
+  telefono
+  responsable
+  keyEvento
+
+  setDatosEventos(){     
+    firebase.database().ref('eventos/'+this.evento).set({
+      nombre: this.evento.nombre,
+      descripcion: this.evento.descripcion,
+      lugar: this.evento.lugar,
+      direccion: this.evento.direccion,
+      fechainicio: this.evento.fechainicio,
+      fechafin: this.evento.fechafin,
+      telefono: this.evento.telefono,    
+      responsable: this.evento.responsable,
+      urlImagen : this.rutaArchivo,
+    })
+    
+    console.log("datos eventos", this.evento);
+  }
+
+  async alertEventoGuardado() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Evento Guardado',
+      message: '<strong>El evento ha sido guardado exitosamente</strong>!!!',
+      buttons: [
+       {
+          text: 'Ok',
+          handler: () => {
+            console.log('Confirmar Ok');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  async alertcompletar() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'campos vacios',
+      message: 'Todos los campos deben estar diligenciados',
+      buttons: [
+       {
+          text: 'Ok',
+          handler: () => {
+            console.log('Confirmar Ok');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  async alertEventoNoGuardado() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Error al publicar un evento',
+      message: '<strong>Ha ocurrido un error al intentar publicar el evento, por favor intente más tarde</strong>!!!',
+      buttons: [
+       {
+          text: 'Ok',
+          handler: () => {
+            console.log('Confirmar Ok');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  imagenlocal: string = "./assets/add-image.jpeg";
+  imagenSubida: File = null;
+
+
+  archivo
+  nombreArchivo
+  rutaArchivo
+  
+  seleccionarArchivo(files){
+    if(files.length === 0) // si no selecciona nada 
+      return
+    
+      let reader = new FileReader();
+      this.archivo = files
+      this.nombreArchivo = files[0].name
+
+      reader.readAsDataURL(files[0]);
+
+      reader.onload = ()=>{
+        this.rutaArchivo = reader.result
+        console.log(' ruta archivo => ',this.rutaArchivo);
+        console.log('archivo ->' , this.archivo);
+        //this.subirArchivo()
+      }
+
+
+  }
+
+  //fin seleccionar archivo -------------------------------------
+
+  urlDescargaArchivo
+  async subirArchivo(){
+    /**
+     * 0. registrar evento en database
+     * 1. obtener el id del evento
+     * 2. crear la tarea para subir el archivo
+     * 3. obtener la ruta del archivo subido
+     * 4. actualizar la info del evento en la base de datos
+     */
+
+    let extension = this.archivo[0].type.split('/').slice(-1)[0];
+      console.log('extension ', extension);
+
+    let tareaSubirArchivo =  firebase.storage().ref('/imagenes/eventos/'+this.keyEvento+'/perfil.'+extension).putString(this.rutaArchivo, 'data_url');
+
+    await tareaSubirArchivo.on('state_changed',(progreso)=>{
+      // codigo a utilizar con la carga
+     
+ 
+    },(erro)=>{
+      console.log('ocurrio un error al cargar e larchivo ', this.nombreArchivo);
+      console.log('detalle error ', erro);
+    },()=>{
+      // obtener la url del archivo subido
+     // this.urlDescargaArchivo = tareaSubirArchivo.snapshot.downloadURL
+
+      tareaSubirArchivo.snapshot.ref.getDownloadURL().then((downloadURL) =>{
+       this.urlDescargaArchivo = downloadURL
+
+        //console.log('File available at', downloadURL);
+      console.log('ruta urll imagne ', this.urlDescargaArchivo );
+
+        /**
+         * 4.1 actualizar evento en la base de datos ... atributo ruta imagen
+         * 4.2 actualizar evento en la base de datos con otro metodo... escritura en multiples rutas
+         * 
+         */
+
+         //4.1 inicio ----------------------
+
+         firebase.database().ref('eventos/'+this.keyEvento+'/urlImagen').set(this.urlDescargaArchivo)
+      
+
+         //4.2 actualizar varias rutas a la vez 
+         /* let updates = {}
+
+          updates['eventos/'+this.keyEvento+'/urlImagen'] = this.urlDescargaArchivo
+          updates['hola/'+this.keyEvento+'/urlImagen'] = this.urlDescargaArchivo
+          updates['hola2/'+this.keyEvento+'/urlImagen'] = this.urlDescargaArchivo
+          updates['hola3/'+this.keyEvento+'/urlImagen'] = this.urlDescargaArchivo
+
+
+
+
+         firebase.database().ref().update(updates).then(()=>{
+           console.log("datos actualizados correctamente");
+
+         }).catch((erro)=>{
+           console.log('error al actualizar todas las tablas');
+
+         })*/
+
+      });
+
+    })
+
   }
 
 

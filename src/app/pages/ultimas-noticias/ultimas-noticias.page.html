@@ -40,10 +40,12 @@
       
       <ion-item>
         <ion-icon name="calendar-outline" slot="start" color="secondary"></ion-icon>
-        <ion-label>{{noticiaTiempoReal[noticia]?.fechainicio}}</ion-label>
-      </ion-item>
+        <div id="fecha">
+          <ion-label value="2020-02-21"  name="fechainicio" >{{noticiaTiempoReal[noticia]?.fechainicio}}</ion-label>
+        </div>
+            </ion-item>
       <ion-item>
-        <ion-icon name="locate-outline" slot="start" color="danger"></ion-icon>
+        <ion-icon name="location-outline" slot="start" color="danger"></ion-icon>
         <ion-label>{{noticiaTiempoReal[noticia]?.lugar}}</ion-label>
       </ion-item>
     </ion-card>

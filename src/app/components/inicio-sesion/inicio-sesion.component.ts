@@ -22,11 +22,11 @@ export class InicioSesionComponent implements OnInit {
   correo
   contrasena
   nombre
-  apellido
+  telefono
   genero
 
   registro(){
-    if(this.correo !=null || this.contrasena != null || this.nombre != null || this.apellido !=null || this.genero !=null){
+    if(this.correo !=null || this.contrasena != null || this.nombre != null || this.genero !=null || this.telefono != null){
       firebase.auth().createUserWithEmailAndPassword(this.correo,this.contrasena).then((usuario)=>{
         console.log(' registro exitoso ', usuario);
         
@@ -41,7 +41,7 @@ export class InicioSesionComponent implements OnInit {
     firebase.database().ref('usuarios/'+user.uid).set({
       nombre: this.nombre,
       correo: this.correo,
-      apellido: this.apellido,
+      telefono: this.telefono,
       genero: this.genero,    
     })
   }).catch((error) =>{
@@ -131,7 +131,7 @@ export class InicioSesionComponent implements OnInit {
   login(){
   if(this.correo !=null || this.contrasena != null ){
     firebase.auth().signInWithEmailAndPassword(this.correo,this.contrasena).then((datos)=>{
-      console.log(' registro exitoso ', datos);
+      console.log(' Login exitoso ', datos);
       
     }).catch((erro)=>{
     console.log('ocurrio un error al intentar iniciar sesion =>',erro);
@@ -142,6 +142,7 @@ export class InicioSesionComponent implements OnInit {
     this.alertDatosLimpios();
   }
   }
+
 
   async alertDatosLimpios() {
     const alert = await this.alertController.create({
@@ -235,7 +236,7 @@ export class InicioSesionComponent implements OnInit {
     this.correo= null
     this.contrasena= null
     this.nombre= null
-    this.apellido= null
+    this.telefono= null
     this.genero= null
   }
 

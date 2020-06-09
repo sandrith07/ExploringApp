@@ -325,10 +325,10 @@
 }
 
 #marker{
-  background-image: url('../assets/icon/gpstertiary.svg');
+  background-image: url('../assets/icon/puntero-negocio.svg');
   background-size: cover;
-  width: 46px;
-  height: 46px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   cursor: pointer;
 }
@@ -338,6 +338,15 @@
   background-size: cover;
   width: 56px;
   height: 56px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+#marker-sitios{
+  background-image: url('../assets/icon/puntero-sitio.svg');
+  background-size: cover;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   cursor: pointer;
 }

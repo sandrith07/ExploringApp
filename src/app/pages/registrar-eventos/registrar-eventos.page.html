@@ -64,13 +64,24 @@
       <ion-input type="text" [(ngModel)]="direccion" name="direccion" required></ion-input>
     </ion-item>
 
+    <ion-item >
+      <ion-label position="floating"  >Teléfono</ion-label>
+      <ion-input type="number" [(ngModel)]="telefono" name="telefono" required></ion-input>
+    </ion-item>
+
+    <ion-item >
+      <ion-label position="floating"  >Responsable</ion-label>
+      <ion-input type="text" [(ngModel)]="responsable" name="responsable" required></ion-input>
+    </ion-item>
+
+
     <ion-item>
       <ion-label>Fecha de inicio</ion-label>
-      <ion-datetime value="2020-02-21" placeholder="Seleccionar fecha"  [(ngModel)]="fechainicio" name="fechainicio" required></ion-datetime>
+      <ion-datetime  min="2020-03-14" max="2035-12-31" value="2020-02-21" placeholder="Seleccionar fecha"  [(ngModel)]="fechainicio" name="fechainicio" required></ion-datetime>
     </ion-item>
     <ion-item>
       <ion-label>Fecha Fin</ion-label>
-      <ion-datetime value="2020-02-21" placeholder="Seleccionar fecha" [(ngModel)]="fechafin" name="fechafin" required></ion-datetime>
+      <ion-datetime  min="2020-03-14" max="2035-12-31" value="2020-02-21" placeholder="Seleccionar fecha" [(ngModel)]="fechafin" name="fechafin" required></ion-datetime>
     </ion-item>
     <br>
           <ion-button expand="block" type="submit" color="secondary" >Guardar</ion-button>

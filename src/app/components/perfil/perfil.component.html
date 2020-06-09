@@ -1,9 +1,42 @@
-  <div class="row center-xs">
+
+<ion-grid>
+  <ion-row>
+    <ion-col size-md="6" offset-md="3">
+      <ion-card *ngIf="user?.administrador" class="admin">
+        <div class="row center-xs"  >
+        <ion-card-title class="ion-padding-top">
+          Bienvenido Sr@ Administrador
+        </ion-card-title>
+        </div>
+      
+        <div class="row center-xs" >
+          <ion-card-subtitle class="ion-padding">
+           ¡Muy pronto estarán listas sus nuevas funcionalidades!
+          </ion-card-subtitle>
+          </div>
+          
+            <ion-img src="assets/img/mantenimiento.jpg" class="ion-padding-top"></ion-img>
+            <div class="row center-xs"  >
+              <ion-card-subtitle class="ion-padding">
+                ¡Gracias por su espera!
+               </ion-card-subtitle>
+              
+            </div>
+          
+       </ion-card>
+     
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+
+
+  <div class="row center-xs"  *ngIf="!user?.administrador">
     <ion-card  class="h-w-140  overflow-none borde-radio-50p" >
       <ion-card-content class="h-w-150 overflow-none padding-0 borde-radio-50p">
         <input hidden #file (change)="seleccionarArchivo(file.files)" type="file" name="file"accept="image/*" required >
-        <img  [src]="rutaArchivo"  *ngIf="rutaArchivo"  class="h-w-140  overflow-none borde-radio-50p">
-        <img  [src]="datosUser.urlImagen"  *ngIf="datosUser.urlImagen"  class="h-w-140  overflow-none borde-radio-50p">
+        <img  [src]="rutaArchivo"  *ngIf="!datosUser?.urlImagen"  class="h-w-140  overflow-none borde-radio-50p">
+        <img  [src]="datosUser?.urlImagen"  *ngIf="datosUser?.urlImagen"  class="h-w-140  overflow-none borde-radio-50p">
         <ion-fab vertical="bottom" horizontal="end" slot="fixed" color="secondary">
           <ion-fab-button size="small" [disabled]="something" edge (click)="file.click()">
             <ion-icon name="camera"></ion-icon>
@@ -13,7 +46,7 @@
     </ion-card>
   </div>
  
-  <ion-card>
+  <ion-card *ngIf="!user?.administrador">
   <ion-toolbar>
     <ion-buttons slot="secondary">
       <ion-button  [disabled]="something" (click)="trueclick('updateD')" (click)="setDatosPersona()" *ngIf="!something">
@@ -31,18 +64,18 @@
 
     <ion-list *ngIf="datosUser">
       <ion-item >
-        <ion-label position="floating" >Nombre</ion-label>
+        <ion-label position="floating" >Nombres</ion-label>
         <ion-input type="text"  [(ngModel)]="datosUser.nombre" [disabled]="something" ></ion-input>
       </ion-item>
       <ion-item >
-        <ion-label position="floating" >Apellido</ion-label>
-        <ion-input type="text"  [(ngModel)]="datosUser.apellido"  [disabled]="something" ></ion-input>
+        <ion-label position="floating" >Teléfono</ion-label>
+        <ion-input type="number"   [(ngModel)]="datosUser.telefono" [disabled]="something" ></ion-input>
       </ion-item>
       <ion-item >
         <ion-label position="floating" >Email</ion-label>
         <ion-input type="text" disabled value="{{datosUser?.correo}}" ></ion-input>
       </ion-item>
-      <ion-item >
+      <ion-item *ngIf="datosUser?.genero" >
         <ion-label position="floating" >Género</ion-label>
         <ion-input type="text" disabled value="{{datosUser?.genero}}" ></ion-input>
       </ion-item>
@@ -53,7 +86,7 @@
   </ion-card-content>
  </ion-card>
 
- <ion-card>
+ <ion-card *ngIf="!user?.administrador">
   <ion-toolbar>
     <ion-buttons slot="secondary">
       <ion-button  [disabled]="somethingP" (click)="trueclick('updateP')" *ngIf="!somethingP">
@@ -80,3 +113,8 @@
 
   </ion-card-content>
  </ion-card>
+
+
+ 
+
+

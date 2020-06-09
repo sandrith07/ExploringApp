@@ -41,6 +41,8 @@ export class RegistrarEventosPage implements OnInit {
   direccion
   fechainicio
   fechafin
+  telefono
+  responsable
   keyEvento
 
   registrarEventos(){
@@ -53,6 +55,8 @@ export class RegistrarEventosPage implements OnInit {
     "descripcion": this.descripcion,
     "direccion": this.direccion,
     "lugar": this.lugar,
+    "telefono": this.telefono,
+    "responsable": this.responsable,
     "fechainicio": this.fechainicio,
     "fechafin": this.fechafin,
     }).then(async ()=>{
@@ -73,6 +77,8 @@ export class RegistrarEventosPage implements OnInit {
     this.fechainicio =null;
     this.fechafin = null;
     this.rutaArchivo = null;
+    this.telefono = null;
+    this.responsable = null;
   }
 
   async alertEventoGuardado() {
