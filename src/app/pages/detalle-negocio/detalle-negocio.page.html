@@ -1,0 +1,21 @@
+<app-header titulo="Detalle de negocio" tipoHeader="backnegocios"></app-header>
+
+<ion-content  >
+
+
+  <ion-card class=" borde-radio-6 " >
+    <ion-item >
+      <ion-card-title  color="dark" id="titulo" class="ion-text-capitalize">{{negocio?.nombre}}</ion-card-title>   
+    </ion-item>
+      <img  [src]="negocio?.imagen"  class="w-h-160   overflow-none">          
+      <ion-item >
+        <ion-card-subtitle  color="dark" class="ion-text-capitalize">{{negocio?.tipo}}</ion-card-subtitle>   
+      </ion-item>
+      <ion-item >
+        <ion-card-subtitle   color="dark"  class="ion-text-capitalize">{{negocio?.direccion}}</ion-card-subtitle>   
+      </ion-item>
+      <ion-item >
+        <ion-card-subtitle  color="dark" class="ion-text-capitalize">{{negocio?.nombre}}</ion-card-subtitle>   
+      </ion-item>
+  </ion-card>
+</ion-content>

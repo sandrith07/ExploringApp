@@ -90,6 +90,7 @@ export class NegocioPage implements OnInit {
   descripcion;
   direccion;
   tipo;
+  imagen;
   user
 
   toggleDelete(negocio) {
@@ -144,7 +145,8 @@ export class NegocioPage implements OnInit {
     firebase.database().ref('usuarios/'+this.user.uid+ '/favorito/').push({
       "direccion": negociod.direccion,
       "tipo": negociod.tipo,
-      "nombre": negociod.nombre
+      "nombre": negociod.nombre,
+      "imagen": negociod.imagen
 
     })
     this.showToast('Añadido');

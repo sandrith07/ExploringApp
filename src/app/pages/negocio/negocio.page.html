@@ -17,22 +17,15 @@
   </div>
 
   <div *ngIf="negociosTiempoReal">
-    <ion-card class=" borde-radio-10 " *ngFor="let negocio of negociosFiltrados">
+    <ion-card class=" borde-radio-6 " *ngFor="let negocio of negociosFiltrados" [routerLink]="['/tabs/negocios/'+ negocio]">
       <ion-item >
         <ion-icon name="star" slot="end" color="warning" *ngIf="negociosTiempoReal[negocio]?.favorito" (click)="toggleDelete(negociosTiempoReal)"></ion-icon>
         <ion-icon name="star-outline" slot="end" color="warning" *ngIf="!negociosTiempoReal[negocio]?.favorito" (click)="toggleAdd(negociosTiempoReal[negocio], negocio)"></ion-icon>
-        <ion-card-title  color="dark" id="titulo" class="ion-text-capitalize">{{negociosTiempoReal[negocio]?.nombre}}</ion-card-title>      
+        <ion-card-title  color="dark" id="titulo" class="ion-text-capitalize">{{negociosTiempoReal[negocio]?.nombre}}</ion-card-title>   
       </ion-item>
-     
-      <ion-item >
-        <ion-icon name="map-outline" slot="start" color="secondary"></ion-icon>
-      <ion-card-subtitle>{{negociosTiempoReal[negocio]?.direccion}}</ion-card-subtitle>
-      </ion-item>
-              
-      <ion-item >
-        <ion-icon name="trail-sign-outline" slot="start" color="danger"></ion-icon>
-      <ion-card-subtitle>{{negociosTiempoReal[negocio]?.tipo}}</ion-card-subtitle>
-      </ion-item>
+      
+        <img  [src]="negociosTiempoReal[negocio]?.imagen"  class="w-h-160   overflow-none">          
+
     </ion-card>
   </div>
 </ion-content>

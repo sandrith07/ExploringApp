@@ -45,7 +45,15 @@ const routes: Routes = [
   {
     path: 'noticias/:id',
     loadChildren: () => import('./pages/noticia/noticia.module').then( m => m.NoticiaPageModule)
+  },  {
+    path: 'detalle-negocio',
+    loadChildren: () => import('./pages/detalle-negocio/detalle-negocio.module').then( m => m.DetalleNegocioPageModule)
   },
+  {
+    path: 'detalle-sitio',
+    loadChildren: () => import('./pages/detalle-sitio/detalle-sitio.module').then( m => m.DetalleSitioPageModule)
+  },
+
 
 
 ];

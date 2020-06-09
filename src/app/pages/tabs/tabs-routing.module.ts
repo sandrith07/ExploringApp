@@ -60,6 +60,14 @@ const routes: Routes = [
         loadChildren: () => import('../noticia/noticia.module').then(m => m.NoticiaPageModule)
       },
       {
+        path: 'negocios/:id',
+        loadChildren: () => import('../detalle-negocio/detalle-negocio.module').then(m => m.DetalleNegocioPageModule)
+      },
+      {
+        path: 'sitios/:id',
+        loadChildren: () => import('../detalle-sitio/detalle-sitio.module').then(m => m.DetalleSitioPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/ultimas-noticias',
         pathMatch: 'full'

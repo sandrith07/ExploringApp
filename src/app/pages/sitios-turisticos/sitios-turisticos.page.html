@@ -1,5 +1,5 @@
 <ion-toolbar>
-  <app-header titulo="Sitios Turisticos" tipoHeader="backtab3"></app-header>
+  <app-header titulo="Sitios Turisticos" tipoHeader="backsitio"></app-header>
 </ion-toolbar>
 <ion-toolbar slot="fixed">
   <ion-searchbar animated [(ngModel)]="filtro" (ionChange)="filtrarSitios()"></ion-searchbar>
@@ -15,19 +15,26 @@
   </div>
 
   <div *ngIf="sitiosTiempoReal">
-    <ion-card class=" borde-radio-10 " *ngFor="let sitio of sitiosFiltrados">
-      <ion-card-header >
-        <ion-card-title  color="dark" id="titulo" class="ion-text-capitalize">{{sitiosTiempoReal[sitio]?.nombre}}</ion-card-title>
-        
-          <ion-item >
-            <ion-icon name="locate" slot="start" color="naranja"></ion-icon>
-          <ion-card-subtitle>{{sitiosTiempoReal[sitio]?.direccion}}</ion-card-subtitle>
-          </ion-item>
-        
-      </ion-card-header>
-      <ion-card-content>
-        <p color="dark" id="subtitle" class="ion-text-justify">{{sitiosTiempoReal[sitio]?.descripcion}}</p>      
-      </ion-card-content>
+    <ion-card class=" borde-radio-10 " *ngFor="let sitio of sitiosFiltrados" [routerLink]="['/tabs/sitios/'+ sitio]">  
+      
+      <ion-grid>
+        <ion-card-title  color="dark" id="titulo" class="ion-text-capitalize margin-left">{{sitiosTiempoReal[sitio]?.nombre}}</ion-card-title>          
+        <ion-row>
+          <ion-col size="6">
+            <img  [src]="sitiosTiempoReal[sitio]?.imagen"  class="h-w-140   overflow-none">
+          </ion-col>
+          <ion-col size="6">
+            <div class="biography">
+              <p  class="ion-text-justify overflow-ellipsis">{{sitiosTiempoReal[sitio]?.descripcion}}</p>
+            </div>
+            
+          </ion-col>
+        </ion-row>
+        <ion-card-subtitle  color="dark" id="titulo" class="ion-text-capitalize">{{sitiosTiempoReal[sitio]?.direccion}}</ion-card-subtitle>
+      </ion-grid>
+
+      
+     
     </ion-card>
   </div>
 </ion-content>

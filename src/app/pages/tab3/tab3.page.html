@@ -56,8 +56,9 @@
         <ion-item >
           <ion-icon name="star" slot="end" color="warning"  (click)="toggleDelete(negocio)"></ion-icon>
           <ion-card-title  color="dark" id="titulo" class="ion-text-capitalize">{{negociosFavoritos[negocio]?.nombre}}</ion-card-title>      
-        </ion-item>
-       
+        </ion-item>        
+        <img  [src]="negociosFavoritos[negocio]?.imagen"  class="w-h-160 overflow-none">          
+  
         <ion-item >
           <ion-icon name="map-outline" slot="start" color="secondary"></ion-icon>
         <ion-card-subtitle>{{negociosFavoritos[negocio]?.direccion}}</ion-card-subtitle>
