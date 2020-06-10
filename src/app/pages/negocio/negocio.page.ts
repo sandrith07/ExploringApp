@@ -93,12 +93,7 @@ export class NegocioPage implements OnInit {
   imagen;
   user
 
-  toggleDelete(negocio) {
-    firebase.database().ref('negocios/'+negocio+ '/favorito').set({
-      favorito: null,
-    })
-    this.showToast('eliminado');
-   }
+
 
    comprobarSesion(){
     firebase.auth().onAuthStateChanged((user)=>{
@@ -156,6 +151,25 @@ export class NegocioPage implements OnInit {
 
    }
    }
+
+   toggleDelete(negociod, negocio) {
+    if(this.user){
+     console.log('Id del negocio', negocio)
+     console.log('datos del negocio', negociod);
+     firebase.database().ref('usuarios/'+this.user.uid+ '/favorito/').set({
+       "direccion": false,
+       "tipo": false,
+       "nombre": false,
+       "imagen": false
+ 
+     })
+     this.showToast('eliminado');
+    }else{
+     
+     this.alertNoFavoritos();
+ 
+    }
+    }
 
    async alertNoFavoritos() {
     const alert = await this.alertController.create({

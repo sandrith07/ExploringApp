@@ -11,6 +11,7 @@ import { PerfilComponent } from './perfil/perfil.component';
 
 
 
+
 @NgModule({
   declarations: [
     MenuComponent,
@@ -18,7 +19,6 @@ import { PerfilComponent } from './perfil/perfil.component';
     LoginComponent,
     InicioSesionComponent,
     PerfilComponent,
-  
 
 
   ],

@@ -4,6 +4,7 @@ import { PopoverController } from '@ionic/angular'
 import { PopoverComponent } from '../../components/popover/popover.component';
 import {ActivatedRoute, Router} from '@angular/router';
 import * as firebase from 'firebase';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab3',
@@ -27,6 +28,7 @@ export class Tab3Page {
     private toastCtrl: ToastController,
     public popoverController: PopoverController,
     private router: Router,
+    public alertController: AlertController
 
   ) {
    this.comprobarSesion();
@@ -60,17 +62,7 @@ export class Tab3Page {
       
     })
   }
-  user
-  filtro
-  negociosFiltrados
-  filtrarNegocios(){
-    if(!this.filtro || this.filtro == ""){
-      this.negociosFiltrados = Object.keys(this.negociosFavoritos || {})
-    }else if(this.filtro != ""){
-      this.negociosFiltrados = this.keys(this.negociosFavoritos).filter((negocio) => (this.negociosFavoritos[negocio].nombre).toString().toLowerCase().includes((this.filtro).toString().toLowerCase()))
 
-    }
-  }
 
 
 
@@ -84,7 +76,7 @@ export class Tab3Page {
         this.negociosFavoritos = datos.val()
         console.log(datos.val())
         
-          this.negociosFiltrados = Object.keys(this.negociosFavoritos)
+          this.negociosFiltrados = Object.keys(this.negociosFavoritos).reverse();
           console.log('sitios tiempo real  favoritos-', this.negociosFavoritos);
 
 
@@ -100,6 +92,19 @@ export class Tab3Page {
       
     })
   }
+
+  user
+  filtro
+  negociosFiltrados
+  filtrarNegocios(){
+    if(!this.filtro || this.filtro == ""){
+      this.negociosFiltrados = Object.keys(this.negociosFavoritos || {})
+    }else if(this.filtro != ""){
+      this.negociosFiltrados = this.keys(this.negociosFavoritos).filter((negocio) => (this.negociosFavoritos[negocio].nombre).toString().toLowerCase().includes((this.filtro).toString().toLowerCase())).reverse();
+
+    }
+  }
+
  
   comprobarSesion(){
     firebase.auth().onAuthStateChanged((user)=>{
@@ -141,12 +146,18 @@ export class Tab3Page {
     })
   }
 
-  toggleDelete(negocio) {
-    firebase.database().ref('negocios/'+negocio+ '/favorito').set({
-      favorito: null,
-    })
-    this.showToast('eliminado');
-   }
+  toggleDelete(negociod, negocio) {
+    if(this.user){
+     console.log('Id del negocio', negocio)
+     console.log('datos del negocio', negociod);
+     firebase.database().ref('usuarios/'+this.user.uid+ '/favorito/'+negocio).remove()
+     this.showToast('eliminado');
+    }else{
+     
+     this.alertNoFavoritos();
+ 
+    }
+    }
 
    toggleAdd(negocio) {
     firebase.database().ref('negocios/'+negocio+ '/favorito').set({
@@ -170,6 +181,25 @@ export class Tab3Page {
        }).then(res => res.present());
      }
    }
+
+   async alertNoFavoritos() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'No puede añadir favoritos',
+      message: '<stron>Para acceder a esta funcionalidad, debes Iniciar Sesión o Registrarte</stron>',
+      buttons: [
+       {
+          text: 'Ok',
+          handler: () => {
+            console.log('Confirmar Ok');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+ 
 
 }
 
