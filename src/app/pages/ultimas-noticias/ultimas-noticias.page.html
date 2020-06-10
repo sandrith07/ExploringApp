@@ -41,7 +41,7 @@
       <ion-item>
         <ion-icon name="calendar-outline" slot="start" color="secondary"></ion-icon>
         <div id="fecha">
-          <ion-label value="2020-02-21"  name="fechainicio" >{{noticiaTiempoReal[noticia]?.fechainicio}}</ion-label>
+          <ion-label  name="fechainicio" >{{noticiaTiempoReal[noticia]?.fechainicio | date:'MMM d, y' || 'fecha sin definir'}}</ion-label>
         </div>
             </ion-item>
       <ion-item>

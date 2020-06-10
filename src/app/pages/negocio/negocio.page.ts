@@ -54,7 +54,7 @@ export class NegocioPage implements OnInit {
       
       if(datos.exists()){
         this.negociosTiempoReal = datos.val()
-        this.negociosFiltrados = Object.keys(this.negociosTiempoReal)
+        this.negociosFiltrados = Object.keys(this.negociosTiempoReal).reverse();
         console.log('sitios tiempo real -', this.negociosTiempoReal);
 
       }else{
@@ -76,7 +76,7 @@ export class NegocioPage implements OnInit {
     if(!this.filtro || this.filtro == ""){
       this.negociosFiltrados = Object.keys(this.negociosTiempoReal || {})
     }else if(this.filtro != ""){
-      this.negociosFiltrados = this.keys(this.negociosTiempoReal).filter((negocio) => (this.negociosTiempoReal[negocio].nombre).toString().toLowerCase().includes((this.filtro).toString().toLowerCase()))
+      this.negociosFiltrados = this.keys(this.negociosTiempoReal).filter((negocio) => (this.negociosTiempoReal[negocio].nombre).toString().toLowerCase().includes((this.filtro).toString().toLowerCase())).reverse();
 
     }
   }

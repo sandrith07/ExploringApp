@@ -45,6 +45,10 @@ export class SitiosTuristicosPage implements OnInit {
     return Object.keys((objeto || {})) 
   }
 
+  keysOrderDesc(objeto: Object){
+    return Object.keys((objeto || {})).reverse();
+  }
+
   consultarSitiosEstactico(){
     console.log('entre a consulta estatica');
     
@@ -71,7 +75,7 @@ export class SitiosTuristicosPage implements OnInit {
       
       if(datos.exists()){
         this.sitiosTiempoReal = datos.val()
-        this.sitiosFiltrados = Object.keys(this.sitiosTiempoReal)
+        this.sitiosFiltrados = Object.keys(this.sitiosTiempoReal).reverse();
         console.log('sitios tiempo real -', this.sitiosTiempoReal);
 
       }else{
@@ -93,7 +97,7 @@ export class SitiosTuristicosPage implements OnInit {
     if(!this.filtro || this.filtro == ""){
       this.sitiosFiltrados = Object.keys(this.sitiosTiempoReal || {})
     }else if(this.filtro != ""){
-      this.sitiosFiltrados = this.keys(this.sitiosTiempoReal).filter((sitio) => (this.sitiosTiempoReal[sitio].nombre).toString().toLowerCase().includes((this.filtro).toString().toLowerCase()))
+      this.sitiosFiltrados = this.keys(this.sitiosTiempoReal).filter((sitio) => (this.sitiosTiempoReal[sitio].nombre).toString().toLowerCase().includes((this.filtro).toString().toLowerCase())).reverse();
 
     }
   }

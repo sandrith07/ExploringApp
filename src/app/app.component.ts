@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import * as firebase from 'firebase';
 import { AngularFireDatabase } from '@angular/fire/database';
+import { ToastController} from '@ionic/angular';
 import {
   Plugins,
   PushNotification,
@@ -46,11 +47,11 @@ export class AppComponent  implements OnInit{
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
+    private toastCtrl: ToastController
   ) {
     if (!firebase.apps.length) {
       firebase.initializeApp(firebaseConfig);
     }
-
 
     this.initializeApp();
     this.comprobarSesion()
@@ -78,32 +79,26 @@ export class AppComponent  implements OnInit{
       }
     });
 
-    // On success, we should be able to receive notifications
-    PushNotifications.addListener('registration',
-      (token: PushNotificationToken) => {
-        alert('Push registration success, token: ' + token.value);
-        this.tok= token.value;
-      }
-    );
+ 
 
     // Some issue with our setup and push will not work
     PushNotifications.addListener('registrationError',
       (error: any) => {
-        alert('Error on registration: ' + JSON.stringify(error));
+        
       }
     );
 
     // Show us the notification payload if the app is open on our device
     PushNotifications.addListener('pushNotificationReceived',
       (notification: PushNotification) => {
-        alert('Push received: ' + JSON.stringify(notification));
+        this.showToast();
       }
     );
 
     // Method called when tapping on a notification
     PushNotifications.addListener('pushNotificationActionPerformed',
       (notification: PushNotificationActionPerformed) => {
-        alert('Push action performed: ' + JSON.stringify(notification));
+        
       }
     );
 }
@@ -121,6 +116,17 @@ export class AppComponent  implements OnInit{
         this.consultarDatosUser()
         this.getTipoUsuario();
         console.log('usuarios logueado');
+
+           // On success, we should be able to receive notifications
+        PushNotifications.addListener('registration',
+        (token: PushNotificationToken) => {
+      
+          console.log("notificacion token", token.value);
+          
+          firebase.database().ref('/subscripciones/eventos/'+ token.value).set(true);
+          this.tok= token.value;
+        }
+      );
 
       }else{
         // usuario con sesion no activa
@@ -176,5 +182,14 @@ export class AppComponent  implements OnInit{
     }).catch(function(error) {
       // An error happened.
     });
+  }
+
+  async showToast(){
+    
+      await this.toastCtrl.create({
+        message: 'Se ha publicado un nuevo evento',
+        duration: 900,
+        position: 'middle'
+      }).then(res => res.present());
   }
 }

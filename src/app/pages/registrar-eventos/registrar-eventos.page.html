@@ -6,9 +6,9 @@
  <form (ngSubmit)="form.form.valid? registrarEventos(): alertcompletar()" #form="ngForm">
  <ion-card>
   <div class="row center-xs">
-    <ion-card  class="w-h-160  overflow-none " >
-      <ion-card-content class="w-h-160 overflow-none padding-0 ">
-        <img [src]= "rutaArchivo" *ngIf="rutaArchivo" >
+    <ion-card  class="w-h-160 " >
+      <ion-card-content class="w-h-160 padding-0 ">
+        <img [src]= "rutaArchivo" *ngIf="rutaArchivo" class="w-h-160 padding-0 ">
         <input hidden #file (change)="seleccionarArchivo(file.files)" type="file" name="file"accept="image/*" required >
         <ion-fab vertical="center" horizontal="center" slot="fixed" >
           <ion-fab-button size="small" edge (click)="file.click()"> 

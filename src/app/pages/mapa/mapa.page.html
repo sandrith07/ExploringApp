@@ -1,2 +1,24 @@
 <app-header titulo="Mapa" tipoHeader="menu"></app-header>
-<div id="mapa" class="map-container"></div>
+<ion-content id="mapa" class="map-container">
+    <ion-fab horizontal="end" vertical="bottom" slot="fixed" >
+        <ion-fab-button color="primary" size="small">
+            <ion-icon md="caret-up" ios="chevron-up-circle-outline"></ion-icon>
+          </ion-fab-button>
+          <ion-fab-list side="top">
+            <ion-fab-button >
+              <ion-icon name="star" color="warning"></ion-icon>
+            </ion-fab-button>
+            <ion-fab-button color="light">
+              <ion-icon name="business" color="verde"></ion-icon>
+            </ion-fab-button>
+            <ion-fab-button color="light">
+                <ion-icon name="briefcase" color="lila"></ion-icon>
+            </ion-fab-button>
+            <ion-fab-button color="light">
+                <ion-icon name="map" color="naranja"></ion-icon>
+            </ion-fab-button>
+          </ion-fab-list>
+      </ion-fab>
+</ion-content>
+
+

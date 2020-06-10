@@ -61,7 +61,11 @@ export class UltimasNoticiasPage implements OnInit {
 
 
   keys(objeto: Object){
-    return Object.keys((objeto || {})) 
+    return Object.keys((objeto || {}));
+  }
+
+  keysOrderDesc(objeto: Object){
+    return Object.keys((objeto || {})).reverse();
   }
 
   noticia
@@ -75,7 +79,7 @@ export class UltimasNoticiasPage implements OnInit {
       
       if(datos.exists()){
         this.noticiaTiempoReal = datos.val()
-        this.noticiaFiltrada = Object.keys(this.noticiaTiempoReal)
+        this.noticiaFiltrada = Object.keys(this.noticiaTiempoReal).reverse();
         console.log('eventos tiempo real -', this.noticiaTiempoReal);
 
       }else{
@@ -98,7 +102,7 @@ export class UltimasNoticiasPage implements OnInit {
     if(!this.filtro || this.filtro == ""){
       this.noticiaFiltrada = Object.keys(this.noticiaTiempoReal || {})
     }else if(this.filtro != ""){
-      this.noticiaFiltrada = this.keys(this.noticiaTiempoReal).filter((noticia) => (this.noticiaTiempoReal[noticia].nombre).toString().toLowerCase().includes((this.filtro).toString().toLowerCase()))
+      this.noticiaFiltrada = this.keys(this.noticiaTiempoReal).filter((noticia) => (this.noticiaTiempoReal[noticia].nombre).toString().toLowerCase().includes((this.filtro).toString().toLowerCase())).reverse();
 
     }
   }
