@@ -1,6 +1,27 @@
 <ion-toolbar>
-  <app-header titulo="Música" tipoHeader="backtab3"></app-header>
+  <app-header titulo="Musica" tipoHeader="backtab3"></app-header>
 </ion-toolbar>
 <ion-content fullscreen >
-  <ion-searchbar animated></ion-searchbar>
+
+  <div *ngIf="musicasTiempoReal">
+    <ion-card class=" borde-radio-6 " *ngFor="let musica of musicaFiltrada">  
+      <ion-item>
+        <ion-card-title  color="dark" id="titulo" class="ion-text-capitalize margin-left">{{musicasTiempoReal[musica]?.nombre}}</ion-card-title> 
+      </ion-item>    
+      <img  [src]="musicasTiempoReal[musica]?.imagen"  class="w-h-150  overflow-none">
+      <ion-item>
+        <ion-card-subtitle class="ion-text-justify overflow-ellipsis"><strong>Artista:</strong> {{musicasTiempoReal[musica]?.artista}}</ion-card-subtitle>
+      </ion-item> 
+      <ion-item>
+        <ion-card-subtitle  class="ion-text-justify overflow-ellipsis"><strong>Albúm:</strong> {{musicasTiempoReal[musica]?.album}}</ion-card-subtitle>
+      </ion-item>  
+      <ion-item href="{{musicasTiempoReal[musica]?.link}}">
+        <div class="biography">
+          <ion-card-subtitle  class=" overflow-ellipsis"> <strong>Link:</strong>  {{musicasTiempoReal[musica]?.link}} </ion-card-subtitle>
+        </div>
+      </ion-item>     
+      
+    </ion-card>
+  </div>
+
 </ion-content>
