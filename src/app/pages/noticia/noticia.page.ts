@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import * as firebase from 'firebase';
 import { AlertController } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-noticia',
@@ -10,20 +11,26 @@ import { AlertController } from '@ionic/angular';
 })
 export class NoticiaPage implements OnInit {
 
-  constructor(private route: ActivatedRoute, public alertController: AlertController ) {
+  constructor(private route: ActivatedRoute, public alertController: AlertController, public navCtrl: NavController ) {
     this.comprobarSesion()
    }
   tipo="detalleT"
-  evento
+  noticia
+  idnoticia
+  actualizar = 'false';
+  something= true;
   ngOnInit() {
    let id= this.route.snapshot.paramMap.get('id');
    firebase.database().ref('/eventos/'+ id).once('value',(datos)=>{
     if(datos.exists()){
-      this.evento = datos.val();
+      this.noticia = datos.val();
     }else{
-      this.evento = null;
+      this.noticia = null;
     }
    })
+
+   console.log("id", id);
+   this.idnoticia= id;
   }
 
   user
@@ -75,21 +82,92 @@ export class NoticiaPage implements OnInit {
   responsable
   keyEvento
 
-  setDatosEventos(){     
-    firebase.database().ref('eventos/'+this.evento).set({
-      nombre: this.evento.nombre,
-      descripcion: this.evento.descripcion,
-      lugar: this.evento.lugar,
-      direccion: this.evento.direccion,
-      fechainicio: this.evento.fechainicio,
-      fechafin: this.evento.fechafin,
-      telefono: this.evento.telefono,    
-      responsable: this.evento.responsable,
-      urlImagen : this.rutaArchivo,
-    })
-    
-    console.log("datos eventos", this.evento);
+
+  activarActualizarEvento(){
+    this.actualizar= 'true';
+    this.something = null;
   }
+
+ eliminarEvento(){     
+    firebase.database().ref('eventos/'+this.idnoticia).remove()
+    this.alertEventoEliminado();
+    this.abrirSalirPagina();
+  }
+
+
+
+  actualizarEvento(){     
+    if(this.rutaArchivo){
+      firebase.database().ref('eventos/'+this.idnoticia).set({
+        nombre: this.noticia.nombre,
+        descripcion: this.noticia.descripcion,
+        lugar: this.noticia.lugar,
+        direccion: this.noticia.direccion,
+        fechainicio: this.noticia.fechainicio,
+        fechafin: this.noticia.fechafin,
+        telefono: this.noticia.telefono,    
+        responsable: this.noticia.responsable,
+        urlImagen : this.rutaArchivo,
+      })
+    }else{
+      firebase.database().ref('eventos/'+this.idnoticia).set({
+        nombre: this.noticia.nombre,
+        descripcion: this.noticia.descripcion,
+        lugar: this.noticia.lugar,
+        direccion: this.noticia.direccion,
+        fechainicio: this.noticia.fechainicio,
+        fechafin: this.noticia.fechafin,
+        telefono: this.noticia.telefono,    
+        responsable: this.noticia.responsable,
+        urlImagen : this.noticia.urlImagen,
+      })
+    }
+    this.alertEventoActualizado();
+    this.abrirSalirPagina();
+  }
+
+  abrirSalirPagina(){
+    this.navCtrl.navigateForward('/tabs/ultimas-noticias');
+  }
+
+ 
+
+  async alertEventoEliminado() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Evento Eliminado',
+      message: '<strong>El evento ha sido eliminado exitosamente</strong>!!!',
+      buttons: [
+       {
+          text: 'Ok',
+          handler: () => {
+            console.log('Confirmar Ok');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  async alertEventoActualizado() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Evento Actualizado',
+      message: '<strong>El evento ha sido avtualizado exitosamente</strong>!!!',
+      buttons: [
+       {
+          text: 'Ok',
+          handler: () => {
+            console.log('Confirmar Ok');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
 
   async alertEventoGuardado() {
     const alert = await this.alertController.create({

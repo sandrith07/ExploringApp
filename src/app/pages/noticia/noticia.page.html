@@ -6,10 +6,10 @@
       <ion-card  class="w-h-160  overflow-none " >
         <ion-card-content class="w-h-160 overflow-none padding-0 ">
           <img [src]= "rutaArchivo" *ngIf="rutaArchivo"  class="w-h-160  overflow-none ">
-          <img [src]= "evento?.urlImagen" *ngIf="evento?.urlImagen"  class="w-h-160  overflow-none ">
-          <input hidden #file (change)="seleccionarArchivo(file.files)" type="file" name="file"accept="image/*" required >
+          <img [src]= "noticia?.urlImagen" *ngIf="noticia?.urlImagen"  class="w-h-160  overflow-none ">
+          <input hidden #file (change)="seleccionarArchivo(file.files)" type="file" name="file"accept="image/*" required [disabled]="something">
           <ion-fab vertical="center" horizontal="center" slot="fixed" >
-            <ion-fab-button size="small" edge (click)="file.click()"> 
+            <ion-fab-button size="small" edge (click)="file.click()" [disabled]="something"> 
               <ion-icon name="image-outline" ></ion-icon>
             </ion-fab-button>
           </ion-fab>
@@ -17,20 +17,20 @@
       </ion-card>
     </div>
   
-    <ion-list>
-      <ion-item >
+    <ion-list >
+      <ion-item [disabled]="something" >
         <ion-label position="floating" >Nombre</ion-label>
-        <ion-input type="text" [(ngModel)]="evento.nombre" name="nombre" required></ion-input>
+        <ion-input type="text" [(ngModel)]="noticia.nombre" name="nombre" required ></ion-input>
       </ion-item>
-      <ion-item >
+      <ion-item [disabled]="something">
         <ion-label position="floating"  >Descripción</ion-label>
-        <ion-textarea  [(ngModel)]="evento.descripcion" name="descripcion" required>
+        <ion-textarea  [(ngModel)]="noticia.descripcion" name="descripcion" required >
         </ion-textarea>
       </ion-item>
   
-      <ion-item>
+      <ion-item [disabled]="something">
         <ion-label>Municipio</ion-label>
-        <ion-select value="Municipios" okText="Ok" cancelText="Cancelar" name="municipio"  [(ngModel)]="evento.lugar"  required>
+        <ion-select value="Municipios" okText="Ok" cancelText="Cancelar" name="municipio"  [(ngModel)]="noticia.lugar"  required>
           <ion-select-option value="Aguachica">Aguachica</ion-select-option>
           <ion-select-option value="Agustín Codazzi">Agustín Codazzi</ion-select-option>
           <ion-select-option value="Bosconia">Bosconia</ion-select-option>
@@ -58,38 +58,42 @@
           <ion-select-option value="Valledupar">Valledupar</ion-select-option>
         </ion-select>
       </ion-item>
-      <ion-item >
+      <ion-item [disabled]="something">
         <ion-label position="floating"  >Dirección</ion-label>
-        <ion-input type="text" [(ngModel)]="evento.direccion" name="direccion" required></ion-input>
+        <ion-input type="text" [(ngModel)]="noticia.direccion" name="direccion" required></ion-input>
       </ion-item>
   
-      <ion-item >
+      <ion-item [disabled]="something">
         <ion-label position="floating"  >Teléfono</ion-label>
-        <ion-input type="number" [(ngModel)]="evento.telefono" name="telefono" required></ion-input>
+        <ion-input type="number" [(ngModel)]="noticia.telefono" name="telefono" required></ion-input>
       </ion-item>
   
-      <ion-item >
+      <ion-item [disabled]="something">
         <ion-label position="floating"  >Responsable</ion-label>
-        <ion-input type="text" [(ngModel)]="evento.responsable" name="responsable" required></ion-input>
+        <ion-input type="text" [(ngModel)]="noticia.responsable" name="responsable" required></ion-input>
       </ion-item>
   
   
-      <ion-item>
+      <ion-item [disabled]="something">
         <ion-label>Fecha de inicio</ion-label>
-        <ion-datetime value="2020-02-21" placeholder="Seleccionar fecha" [(ngModel)]="evento.fechainicio" name="fechainicio" required></ion-datetime>
+        <ion-datetime value="2020-02-21" placeholder="Seleccionar fecha" [(ngModel)]="noticia.fechainicio" name="fechainicio" required></ion-datetime>
       </ion-item>
-      <ion-item>
+      <ion-item [disabled]="something">
         <ion-label>Fecha Fin</ion-label>
-        <ion-datetime value="2020-02-21" placeholder="Seleccionar fecha" [(ngModel)]="evento.fechafin" name="fechafin" required></ion-datetime>
+        <ion-datetime value="2020-02-21" placeholder="Seleccionar fecha" [(ngModel)]="noticia.fechafin" name="fechafin" required></ion-datetime>
       </ion-item>
       
       <div class="ion-margin ion-text-center">
-        <ion-button  slot="end" fill="outline" color="danger">
+        <ion-button  slot="end" fill="outline" color="danger" (click)="eliminarEvento()">
           <ion-icon name="trash-outline" slot="start" color="danger"></ion-icon>
           Eliminar
         </ion-button>
         
-          <ion-button  slot="end" fill="outline" color="suceso">
+          <ion-button  slot="end" fill="outline" color="suceso" (click)="actualizarEvento()" *ngIf="actualizar=='true'">
+            <ion-icon name="checkmark-outline" slot="start" color="suceso"></ion-icon>
+            Guardar
+          </ion-button>
+          <ion-button  slot="end" fill="outline" color="suceso" (click)="activarActualizarEvento()" *ngIf="actualizar=='false'">
             <ion-icon name="checkmark-outline" slot="start" color="suceso"></ion-icon>
             Actualizar
           </ion-button>
@@ -99,21 +103,21 @@
   
    </ion-card>
    <ion-card *ngIf="!user?.administrador" class=" borde-radio-10 ">
-    <ion-title color="dark" id="titulo" class="ion-text-capitalize">{{evento?.nombre}}</ion-title>
+    <ion-title color="dark" id="titulo" class="ion-text-capitalize">{{noticia?.nombre}}</ion-title>
     <ion-card-header>
-    <ion-img src="{{evento?.urlImagen}}"></ion-img>
+    <ion-img src="{{noticia?.urlImagen}}"></ion-img>
     </ion-card-header>
     <ion-item>
       <ion-icon name="calendar-outline" slot="start" color="secondary"></ion-icon>
-      <ion-label>{{evento?.fechainicio}} - {{evento?.fechafin}}</ion-label>
+      <ion-label>{{noticia?.fechainicio}} - {{noticia?.fechafin}}</ion-label>
       </ion-item>
         <ion-item>
           <ion-icon name="map-outline" slot="start" color="verde"></ion-icon>
-          <ion-label>{{evento?.lugar}}</ion-label>
+          <ion-label>{{noticia?.lugar}}</ion-label>
         </ion-item>
           <ion-card-content>
   
-              {{evento?.descripcion}}
+              {{noticia?.descripcion}}
   
           </ion-card-content>
       

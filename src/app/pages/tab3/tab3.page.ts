@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ToastController} from '@ionic/angular';
 import { PopoverController } from '@ionic/angular'
 import { PopoverComponent } from '../../components/popover/popover.component';
 import {ActivatedRoute, Router} from '@angular/router';
 import * as firebase from 'firebase';
 import { AlertController } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab3',
@@ -13,10 +14,12 @@ import { AlertController } from '@ionic/angular';
 })
 export class Tab3Page {
    accion = 'todos';
+   reload= false;
     visible = false;
     negociosFavoritos;
     negocios;
     negociosTiempoReal;
+   
   /*
   tema: Tema = {
     titulo: '',
@@ -28,7 +31,8 @@ export class Tab3Page {
     private toastCtrl: ToastController,
     public popoverController: PopoverController,
     private router: Router,
-    public alertController: AlertController
+    public alertController: AlertController,
+    public navCtrl: NavController 
 
   ) {
    this.comprobarSesion();
@@ -93,6 +97,8 @@ export class Tab3Page {
     })
   }
 
+
+
   user
   filtro
   negociosFiltrados
@@ -146,26 +152,18 @@ export class Tab3Page {
     })
   }
 
-  toggleDelete(negociod, negocio) {
+  toggleDelete(negocio) {
     if(this.user){
      console.log('Id del negocio', negocio)
-     console.log('datos del negocio', negociod);
      firebase.database().ref('usuarios/'+this.user.uid+ '/favorito/'+negocio).remove()
+     this.negociosFiltrados={};
+     this.negociosFiltrados = Object.keys(this.negociosFavoritos).reverse();
+     console.log('sitios tiempo real  favoritos-', this.negociosFavoritos);
      this.showToast('eliminado');
     }else{
-     
      this.alertNoFavoritos();
- 
     }
-    }
-
-   toggleAdd(negocio) {
-    firebase.database().ref('negocios/'+negocio+ '/favorito').set({
-      favorito: true,
-    })
-    this.showToast('Añadido');
-   }
- 
+    } 
    async  showToast(estado : any){
      if(estado === 'eliminado'){
        await this.toastCtrl.create({

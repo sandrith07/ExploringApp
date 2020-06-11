@@ -4,6 +4,7 @@ import { Validators } from '@angular/forms';
 import { ToastController} from '@ionic/angular';
 import { NegocioPageModule } from './negocio.module';
 import { AlertController } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-negocio',
@@ -16,7 +17,7 @@ export class NegocioPage implements OnInit {
   negociosTiempoReal
   negociosFavoritos
 
-  constructor(private toastCtrl: ToastController,public alertController: AlertController){
+  constructor(private toastCtrl: ToastController,public alertController: AlertController, public navCtrl: NavController ){
     this.comprobarSesion(),
     this.consultarSitiosTiempoReal()
   }
@@ -50,8 +51,7 @@ export class NegocioPage implements OnInit {
     console.log('entre a consulta tiempo real');
 
     firebase.database().ref('negocios').on('value', (datos)=>{
-      console.log('entre a firebase consulta');
-      
+          
       if(datos.exists()){
         this.negociosTiempoReal = datos.val()
         this.negociosFiltrados = Object.keys(this.negociosTiempoReal).reverse();
@@ -137,20 +137,48 @@ export class NegocioPage implements OnInit {
    if(this.user){
     console.log('Id del negocio', negocio)
     console.log('datos del negocio', negociod);
-    firebase.database().ref('usuarios/'+this.user.uid+ '/favorito/').push({
-      "direccion": negociod.direccion,
-      "tipo": negociod.tipo,
-      "nombre": negociod.nombre,
-      "imagen": negociod.imagen
-
-    })
-    this.showToast('Añadido');
+    this.consultarFavoritoRepetido(negociod, negocio);
    }else{
     
     this.alertNoFavoritos();
 
    }
    }
+
+
+   consultarFavoritoRepetido(negociod, negocio){
+    console.log('entre a consulta tiempo real');
+    console.log("el user es: ", this.user.uid);
+    
+    firebase.database().ref('usuarios/'+this.user.uid+'/favorito/'+negociod.nombre).on('value', (datos)=>{
+      
+      if(datos.exists()){
+        console.log('entre a firebase consulta esto es el dato', datos);
+        this.alertFavoritos();
+
+      }else{
+        firebase.database().ref('usuarios/'+this.user.uid+ '/favorito/').push({
+          "direccion": negociod.direccion,
+          "tipo": negociod.tipo,
+          "nombre": negociod.nombre,
+          "imagen": negociod.imagen
+    
+        })
+        this.showToast('Añadido');
+        console.log("mostrando negocio solo" , negociod);
+        console.log("mostrando negocio id", negocio);
+                
+      }
+    },(erro)=>{
+      
+      
+    })
+  }
+
+
+   abrirFavoritos(){
+    this.navCtrl.navigateForward('/tabs/tab3');
+  }
 
    toggleDelete(negociod, negocio) {
     if(this.user){
@@ -176,6 +204,24 @@ export class NegocioPage implements OnInit {
       cssClass: 'my-custom-class',
       header: 'No puede añadir favoritos',
       message: '<stron>Para acceder a esta funcionalidad, debes Iniciar Sesión o Registrarte</stron>',
+      buttons: [
+       {
+          text: 'Ok',
+          handler: () => {
+            console.log('Confirmar Ok');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  async alertFavoritos() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Este negocio ya hace parte de tus favoritos',
+      message: '<stron>Este negocio ya hace parte de tus favoritos, revisa el apartado de favoritos</stron>',
       buttons: [
        {
           text: 'Ok',
