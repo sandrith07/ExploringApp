@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
 import { Validators, FormBuilder } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-registrar-eventos',
@@ -10,7 +11,7 @@ import { AlertController } from '@ionic/angular';
 })
 export class RegistrarEventosPage implements OnInit {
 
-  constructor(public alertController: AlertController) {
+  constructor(public alertController: AlertController, public navCtrl: NavController) {
     this.comprobarSesion()
   }
 
@@ -67,7 +68,11 @@ export class RegistrarEventosPage implements OnInit {
       console.log('ocurrio un error al intentar crear un evento =>',error);
       this.alertEventoNoGuardado()
     });
-    this.alertEventoGuardado()
+    this.alertEventoGuardado();
+    this.abrirSalirPagina();
+  }
+  abrirSalirPagina(){
+    this.navCtrl.navigateForward('/tabs/ultimas-noticias');
   }
 
   limpiar(){
@@ -80,6 +85,8 @@ export class RegistrarEventosPage implements OnInit {
     this.telefono = null;
     this.responsable = null;
   }
+
+  
 
   async alertEventoGuardado() {
     const alert = await this.alertController.create({
