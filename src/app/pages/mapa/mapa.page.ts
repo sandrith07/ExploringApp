@@ -206,12 +206,13 @@ export class MapaPage implements OnInit {
 
  
 mostrarUbicacionNegocios(){
-
+let cantidad = 0;
       for(let negocio of this.negociosFiltrados){
         let nombre=this.negociosTiempoReal[negocio].nombre;
         let tipo=this.negociosTiempoReal[negocio].tipo;
         let imagen=this.negociosTiempoReal[negocio]?.imagen;
         console.log("tipo", tipo)
+        cantidad = cantidad+1;
         const latitud= this.negociosTiempoReal[negocio].latitud;
         const longitud=this.negociosTiempoReal[negocio].longitud;
 
@@ -225,6 +226,8 @@ mostrarUbicacionNegocios(){
           .setLngLat([longitud, latitud]).setPopup(sitio)
           .addTo(this.mapa);
       }
+      console.log("Cantidad negocios ", cantidad);
+      
   }
 
 
@@ -267,12 +270,11 @@ mostrarUbicacionNegocios(){
   }
 
   mostrarUbicacionSitios(){
-
+    let cantidadsitios = 0;
     for(let sitiot of this.sitiosFiltrados){
       let nombre=this.sitiosTiempoReal[sitiot].nombre;
-      let tipo=this.sitiosTiempoReal[sitiot].tipo;
       let imagen=this.sitiosTiempoReal[sitiot]?.imagen;
-      console.log("tipo", tipo)
+      cantidadsitios= cantidadsitios +1;
       const latitud= this.sitiosTiempoReal[sitiot].latitud;
       const longitud=this.sitiosTiempoReal[sitiot].longitud;
 
@@ -286,6 +288,8 @@ mostrarUbicacionNegocios(){
         .setLngLat([longitud, latitud]).setPopup(sitio)
         .addTo(this.mapa);
     }
+    console.log("cantidad de sitios ", cantidadsitios);
+    
 }
 
 

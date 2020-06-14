@@ -1,7 +1,20 @@
 <ion-toolbar>
   <app-header titulo="Musica" tipoHeader="backtab3"></app-header>
 </ion-toolbar>
+<ion-toolbar slot="fixed">
+  <ion-searchbar animated [(ngModel)]="filtro" (ionChange)="filtrarCanciones()"></ion-searchbar>
+</ion-toolbar>
+
 <ion-content fullscreen >
+  <div *ngIf="!musicasTiempoReal">
+    <ion-card mode="ios" class=" borde-radio-6 ">
+      <ion-card-header mode="ios">
+        <ion-card-title mode="ios" color="primary"><ion-skeleton-text animated style="width: 88%" class="borde-radio-10"></ion-skeleton-text></ion-card-title>
+        <ion-card-subtitle mode="ios" color="secondary"><ion-skeleton-text animated style="width: 60%" class="borde-radio-10"></ion-skeleton-text></ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
+  </div>
+
 
   <div *ngIf="musicasTiempoReal">
     <ion-card class=" borde-radio-6 " *ngFor="let musica of musicaFiltrada">  

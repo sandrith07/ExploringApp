@@ -17,16 +17,17 @@
   </div>
 
   <div *ngIf="historiasTiempoReal">
-    <ion-card class=" borde-radio-10 " *ngFor="let historia of historiasFiltradas">
-      <ion-card-header >
-        <ion-card-title  color="dark" id="titulo" class="ion-text-capitalize">{{historiasTiempoReal[historia]?.nombre}}</ion-card-title>      
-      </ion-card-header>
-      <ion-item href="{{historiasTiempoReal[historia]?.url}}">
-        <ion-icon name="link" slot="start" color="primary"></ion-icon>
-      <ion-card-subtitle color="primary">{{historiasTiempoReal[historia]?.url}}</ion-card-subtitle>
+    <ion-card class=" borde-radio-6" *ngFor="let historia of historiasFiltradas">
+      <ion-item>
+        <div class="biographyLugar">
+          <ion-card-title  color="dark" id="titulo" class="ion-text-capitalize">{{historiasTiempoReal[historia]?.nombre}}</ion-card-title>      
+        </div>
       </ion-item>
+
       <ion-card-content >
-        <ion-card-subtitle class="ion-text-justify">{{historiasTiempoReal[historia]?.descripcion}}</ion-card-subtitle>
+        <div class="biographyHistoria">
+          <ion-card-subtitle class="ion-text-justify">{{historiasTiempoReal[historia]?.descripcion}}</ion-card-subtitle>
+        </div>
       </ion-card-content>
               
 

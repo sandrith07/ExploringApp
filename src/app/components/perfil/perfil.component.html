@@ -55,7 +55,7 @@
     </ion-buttons>
     <ion-buttons slot="secondary">
       <ion-button  (click)="trueclick('editD')" >
-        <ion-icon name="color-wand-outline" slot="end" color="primary"></ion-icon>
+        <ion-icon name="create" slot="end" color="primary"></ion-icon>
       </ion-button>
     </ion-buttons>
   <ion-title id="titulo">Datos Personales</ion-title>
@@ -91,11 +91,12 @@
     <ion-buttons slot="secondary">
       <ion-button  [disabled]="somethingP" (click)="trueclick('updateP')" *ngIf="!somethingP">
         <ion-icon name="checkmark-outline" slot="end" color="suceso"></ion-icon>
+        
       </ion-button>
     </ion-buttons>
     <ion-buttons slot="secondary">
       <ion-button (click)="trueclick('editP')" >
-        <ion-icon name="color-wand-outline" slot="end" color="primary"></ion-icon>
+        <ion-icon name="create" slot="end" color="primary"></ion-icon>
       </ion-button>
     </ion-buttons>
   <ion-title id="titulo">Seguridad</ion-title>

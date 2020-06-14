@@ -15,16 +15,21 @@
   </div>
 
   <div *ngIf="eventosTiempoReal">
-    <ion-card class=" borde-radio-10 " *ngFor="let evento of eventosFiltrados">
-      <ion-card-header >
-        <ion-card-title  color="dark" id="titulo" class="ion-text-capitalize">{{eventosTiempoReal[evento]?.nombre}}</ion-card-title>      
-      </ion-card-header>
-      <ion-item href="{{eventosTiempoReal[evento]?.url}}">
-        <ion-icon name="link" slot="start"></ion-icon>
-      <ion-card-subtitle >{{eventosTiempoReal[evento]?.url}}</ion-card-subtitle>
+    <ion-card class=" borde-radio-6" *ngFor="let evento of eventosFiltrados">
+        <ion-item>
+          <div class="biographyEvento">
+            <ion-card-title  color="dark" id="titulo" class="ion-text-capitalize">{{eventosTiempoReal[evento]?.nombre}}</ion-card-title>      
+          </div>
+        </ion-item>
+        <img  [src]="eventosTiempoReal[evento]?.imagen"  class="w-h-150  overflow-none" *ngIf="eventosTiempoReal[evento]?.imagen">
+      <ion-item *ngIf="eventosTiempoReal[evento]?.fecha">
+        <ion-icon name="calendar" slot="start" color="verde"></ion-icon>
+      <ion-card-subtitle >{{eventosTiempoReal[evento]?.fecha}}</ion-card-subtitle>
       </ion-item>
       <ion-card-content >
-        <ion-card-subtitle class="ion-text-justify">{{eventosTiempoReal[evento]?.descripcion}}</ion-card-subtitle>
+        <div class="biography">
+          <ion-card-subtitle class="ion-text-justify">{{eventosTiempoReal[evento]?.descripcion}}</ion-card-subtitle>
+        </div>
       </ion-card-content>
               
 

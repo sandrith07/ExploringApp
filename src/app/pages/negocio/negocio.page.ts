@@ -251,4 +251,16 @@ export class NegocioPage implements OnInit {
      }
    }
 
+
+   toggleAddMegusta(negociod, negocio) {
+    if(this.user){
+     console.log('Id del negocio', negocio)
+
+    }else{
+     
+     this.alertNoFavoritos();
+ 
+    }
+    }
+
 }

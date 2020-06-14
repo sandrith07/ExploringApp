@@ -1,10 +1,11 @@
+
 #titulo{
-  color: #0066CC;
-  font-family: Merriweather;
-  font-style: italic;
-  font-weight: 700;
+  
+  margin: 5px;
+  font-family: RobotoSlab;
+  font-weight: 500;
   font-display: swap;
-  }
+}
   
 .ion-text-justify{
     text-align: justify;
@@ -17,6 +18,34 @@
 
 ion-slides {
   height: 100%;
+}
+$line-height: 1.4;
+$lines: 5;
+
+.biography{
+    display: block;
+    display: -webkit-box;
+    height:  $line-height * $lines;
+    line-height: $line-height;
+    -webkit-line-clamp: $lines;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+
+$linesEvento: 1;
+
+.biographyEvento{
+    display: block;
+    display: -webkit-box;
+    height:  $line-height * $linesEvento;
+    line-height: $line-height;
+    -webkit-line-clamp: $linesEvento;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .swiper-slide {
